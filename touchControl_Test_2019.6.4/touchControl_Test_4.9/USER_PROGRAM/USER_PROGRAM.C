@@ -1365,26 +1365,7 @@ void USER_PROGRAM()
 			    	long_key_flag = 0;
 			    	if(zhineng_flag == 1 && key_lock_flag == 0)//智能模式下，设置周模式
 			    	{
-			    		
-			    		//adjust_time_index++;
-//			    		adjust_time_intercal_index++;//一共四个时间段
-//
-//			    		
-//			    		if(adjust_time_intercal_index > 4 )//时间段权限最高，只要满足四个时间段就跳转到后面一天
-//			    		{
-//			    			seg_week++;
-//			    			if(seg_week > 7)seg_week = 1;
-//			    			adjust_time_index = 1;//星期数码管闪烁
-//			    			adjust_time_intercal_index = 1;
-//			    		}
-//			    		else 
-//			    		{
-//			    			/*先设置星期，光标在星期数码管位置闪烁，再次按下设置键后，跳转到温度数码管闪烁以此类推，
-//			    			直到满足4个时间段，或时间到24小时；在按下设置键，又跳转到星期数码管闪烁*/
-//			    				
-//			    					
-//			    		}
-			    		
+			    					    		
 			    		if(set_week_schedule_flag == 0)//智能模式，第一次按下，进入设置模式下 0点不可修改
 				    	{
 				    		set_week_schedule_flag = 1; //设置周模式标志位
