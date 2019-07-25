@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<tkproject>
+    <tkwsinfo>
+        <version>3.5.1.0</version>
+    </tkwsinfo>
+    <project>
+        <mcu>BS67F350</mcu>
+        <package>48LQFP</package>
+        <path>C:\Users\Lgy\Desktop\ht_test_code\bs67f350newTest\touchTest</path>
+        <name>touchTest</name>
+        <library name="BS67F350_LIBV413" version="BS67F350_LIBV413" />
+    </project>
+    <global>
+        <option>
+            <property>Debounce Times</property>
+            <value>30mS</value>
+            <rvalue>0</rvalue>
+        </option>
+    </global>
+    <mcuconfig list_mode="0" list_simple="0">
+        <key index="17">
+            <match_pin>27</match_pin>
+        </key>
+        <key index="16">
+            <match_pin>28</match_pin>
+        </key>
+        <key index="15">
+            <match_pin>29</match_pin>
+        </key>
+        <key index="14">
+            <match_pin>30</match_pin>
+        </key>
+        <key index="13">
+            <match_pin>31</match_pin>
+        </key>
+    </mcuconfig>
+    <usrwnd>
+        <download flag="0" />
+        <ocds_mode>0</ocds_mode>
+    </usrwnd>
+</tkproject>
