@@ -1128,7 +1128,7 @@ void USER_PROGRAM_INITIAL()
    
  	init_ds1302();//DS1302实时时钟初始化
  	init_TM1638();//TM1638初始化
- 	led_light_level(5);//led灯初始亮度
+ 	led_light_level(1);//led灯初始亮度
  	
     ntcinit();//热敏电阻初始化
     UART_Init();//串口初始化
@@ -1447,9 +1447,19 @@ void USER_PROGRAM()
 				    					set_tempture_value = set_week_schedule[seg_week-1][adjust_time_intercal_index-1].set_temp;
 				    					seg_minute = 0;
 				    				}
-				    				else {
-				    				set_tempture_value = set_week_schedule[seg_week-1][adjust_time_intercal_index].set_temp;
-				    				seg_minute = set_week_schedule[seg_week - 1][adjust_time_intercal_index].start_time;	
+				    				else 
+				    				{
+				    					if(adjust_time_intercal_index == 4)
+				    					{
+				    						seg_hour =24;
+				    						seg_minute = 0;
+				    						set_tempture_value = 5;		
+				    					}
+				    					else {
+				    						set_tempture_value = set_week_schedule[seg_week-1][adjust_time_intercal_index].set_temp;
+				    						seg_minute = set_week_schedule[seg_week - 1][adjust_time_intercal_index].start_time;		
+				    					}
+	
 				    				}
 				    				
 				    			}
@@ -1533,7 +1543,7 @@ void USER_PROGRAM()
 	  	}
 
 	  	
-	    if(/*int0_flag == 1 &&*/ key_lock_flag != 1 && confirm_lock_key_flag != 1 && start_system == 0 && set_week_schedule_flag == 0)
+	    if(int0_flag == 1 && key_lock_flag != 1 && confirm_lock_key_flag != 1 && start_system == 0 && set_week_schedule_flag == 0)
 	    {
 	    	int0_flag = 0;
 			current_tempture = GetTemp();//读取当前NTC电阻的实时温度
