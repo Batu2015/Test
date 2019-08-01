@@ -1086,6 +1086,7 @@ void select_model_()
 void USER_PROGRAM_INITIAL()
 {
 	 int i = 0;
+	 unsigned char temp_vaule;
 
 	GCC_CLRWDT();//关闭看门狗
 	system_clock_init();//系统时钟初始化
@@ -1096,7 +1097,15 @@ void USER_PROGRAM_INITIAL()
 	LED_detection = 0;
 	
 	set_Serial_number = 0;//后台功能序号
-	set_tempture_max_value = 85;
+	temp_vaule = EEPROM_ByteRead(0x7e);
+	if(temp_vaule >= 85 || temp_vaule <= 5)
+	{
+		set_tempture_max_value = 85;	
+	}
+	else
+	{
+		set_tempture_max_value = temp_vaule;//上电初始化最大值	
+	}
 	
 	confirm_lock_key_flag = 0;
 	adjust_time_index = 4;
@@ -1105,7 +1114,7 @@ void USER_PROGRAM_INITIAL()
 	adjust_week_index = 0;
 	set_week_schedule_flag = 0;//初始化week模式
 					    		
-	contirm_delay = 20000;//20S
+	contirm_delay = 10000;//20S
 	ctm0_count = 500;
 	
 	key_lock_flag = 0;
@@ -1171,10 +1180,10 @@ void USER_PROGRAM_INITIAL()
 		{
 					
 		}
-		UART_SendChar(set_week_schedule[0][i].enable);
-		UART_SendChar(set_week_schedule[0][i].set_temp);
-		UART_SendChar(set_week_schedule[0][i].start_time);
-		UART_SendChar(set_week_schedule[0][i].end_time);
+//		UART_SendChar(set_week_schedule[0][i].enable);
+//		UART_SendChar(set_week_schedule[0][i].set_temp);
+//		UART_SendChar(set_week_schedule[0][i].start_time);
+//		UART_SendChar(set_week_schedule[0][i].end_time);
 		
 	}
 	
@@ -1210,6 +1219,13 @@ void USER_PROGRAM()
 	GCC_CLRWDT();	
 	GET_KEY_BITMAP();	
 			
+			
+			/*检测是否有按键按下*/
+			if(DATA_BUF[1] != 0x00 || DATA_BUF[2] != 0x00)
+			{
+				contirm_delay = 10000;//10秒
+			}
+
 	  		if(B_2ms == 1)
 			{
 				B_2ms = 0;	
@@ -1245,7 +1261,7 @@ void USER_PROGRAM()
 		    			long_startup_key_flag = 0;
 		    		}
 		    	
-		    		if(key_confirm_flag == 1 && short_startup_key_flag == 1 && long_startup_key_flag == 0 && start_system == 0)//确认按键
+		    		if(key_confirm_flag == 1 && short_startup_key_flag == 1 && long_startup_key_flag == 0 && start_system == 0 )//确认按键
 					{
 						key_confirm_flag = 0;
 						short_startup_key_flag = 0;
@@ -1744,6 +1760,7 @@ void USER_PROGRAM()
 									
 									set_tempture_max_value++;
 									if(set_tempture_max_value > 85)set_tempture_max_value = 85;	
+									EEPROM_ByteWrite(0x7e,set_tempture_max_value);	//0x7e 地址存储 后台 可设置的最大值
 									
 									SendString("test add flag: ");
 									UART_SendChar(set_tempture_max_value);
@@ -1782,7 +1799,7 @@ void USER_PROGRAM()
 							SendString("33333");
 							set_tempture_max_value--;
 							if(set_tempture_max_value <5)set_tempture_max_value = 5;
-							
+							EEPROM_ByteWrite(0x7e,set_tempture_max_value);	//0x7e 地址存储 后台 可设置的最大值
 							//display_get_NTC_tempture(set_tempture_max_value);
 						//	display_update();	
 								
@@ -1911,12 +1928,12 @@ DEFINE_ISR(ctm0,0x14)
 			}
 		}		
 		
-		if(key_lock_flag == 1)
+		if(key_lock_flag == 1 || set_week_schedule_flag == 1)
 		{
 			if(--contirm_delay < 0)//20S	
 			{
 				key_lock_flag = 0;
-				contirm_delay = 20000;		
+				contirm_delay = 10000;		
 			}	
 		}
 	}

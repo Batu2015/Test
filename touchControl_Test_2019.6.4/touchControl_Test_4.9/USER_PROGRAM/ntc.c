@@ -17,6 +17,7 @@ unsigned char  index1=0;
 unsigned char ADCcount = 0;    //ADC采样次数变量  
 
 //NTC使用MF52-103/3435;10K±1％精度;B值:3435±1％
+
 //939,978,1017
 //const unsigned int temptab11[]={  //0 to 99℃   10k ntc 3950 5%精度
 // 939,978,1017,1058,1098,1140,1182,1225,1269,1313,
