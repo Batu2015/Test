@@ -58,37 +58,37 @@ Input Library File: C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V7.x
      00h     0f7ch     0fddh    0062h      CODE               _read_eeprom_schedule (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
      00h     0fdeh     105bh    007eh      CODE               _select_model_ (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
      00h     105ch     10f9h    009eh      CODE               _USER_PROGRAM_INITIAL (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     00h     10fah     17e2h    06e9h      CODE               _USER_PROGRAM (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     00h     17e3h     185dh    007bh      CODE               _INT0 (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     00h     185eh     18adh    0050h      CODE               _ctm0 (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     00h     18aeh     1922h    0075h      CODE               _stm0 (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     00h     1923h     192ah    0008h      CODE               _ntcinit (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\NTC.OBJ)
-     00h     192bh     1941h    0017h      CODE               _getad (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\NTC.OBJ)
-     00h     1942h     19b6h    0075h      CODE               _get_adc_value (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\NTC.OBJ)
-     00h     19b7h     1a38h    0082h      CODE               _GetAdToTempature (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\NTC.OBJ)
-     00h     1a39h     1a6fh    0037h      CODE               _GetTemp (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\NTC.OBJ)
-     00h     1a70h     1a87h    0018h      CODE               _Data_ToBCD (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\DS1302.OBJ)
-     00h     1a88h     1a9eh    0017h      CODE               _Write_Ds1302_Byte (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\DS1302.OBJ)
-     00h     1a9fh     1ab0h    0012h      CODE               _Write_Ds1302 (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\DS1302.OBJ)
-     00h     1ab1h     1acah    001ah      CODE               _ds1302_readbyte (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\DS1302.OBJ)
-     00h     1acbh     1aeeh    0024h      CODE               _Read_Ds1302 (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\DS1302.OBJ)
-     00h     1aefh     1b0bh    001dh      CODE               _Read_RTC (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\DS1302.OBJ)
-     00h     1b0ch     1b50h    0045h      CODE               _Set_RTC (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\DS1302.OBJ)
-     00h     1b51h     1b74h    0024h      CODE               _init_ds1302 (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\DS1302.OBJ)
-     00h     1b75h     1b89h    0015h      CODE               _TM1638_Write (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\TM1638.OBJ)
-     00h     1b8ah     1b91h    0008h      CODE               _Write_COM (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\TM1638.OBJ)
-     00h     1b92h     1ba0h    000fh      CODE               _Write_DATA (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\TM1638.OBJ)
-     00h     1ba1h     1bb3h    0013h      CODE               _EEPROM_ByteWrite (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\EEPROM.OBJ)
-     00h     1bb4h     1bc4h    0011h      CODE               _EEPROM_ByteRead (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\EEPROM.OBJ)
-     00h     1bc5h     1bceh    000ah      CODE               __DELAYX (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V7.x\LIB\LIBHOLTEKGCC.LIB)
-     00h     1bcfh     1bdch    000eh      CODE               _builtin_holtek_delay_isr00 (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V7.x\LIB\LIBHOLTEKGCC.LIB)
-     00h     1bddh     1c01h    0025h      CODE               _builtin_holtek_divmodqi4_isr00 (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V7.x\LIB\LIBHOLTEKGCC.LIB)
-     00h     1c02h     1c38h    0037h      CODE               _builtin_holtek_divmodhi4_isr00 (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V7.x\LIB\LIBHOLTEKGCC.LIB)
-     00h     1c39h     1c48h    0010h      CODE               _CROM2PROM (CROM2PROM)
+     00h     10fah     17deh    06e5h      CODE               _USER_PROGRAM (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     00h     17dfh     1859h    007bh      CODE               _INT0 (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     00h     185ah     18a9h    0050h      CODE               _ctm0 (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     00h     18aah     191eh    0075h      CODE               _stm0 (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     00h     191fh     1926h    0008h      CODE               _ntcinit (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\NTC.OBJ)
+     00h     1927h     193dh    0017h      CODE               _getad (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\NTC.OBJ)
+     00h     193eh     19b2h    0075h      CODE               _get_adc_value (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\NTC.OBJ)
+     00h     19b3h     1a34h    0082h      CODE               _GetAdToTempature (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\NTC.OBJ)
+     00h     1a35h     1a6bh    0037h      CODE               _GetTemp (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\NTC.OBJ)
+     00h     1a6ch     1a83h    0018h      CODE               _Data_ToBCD (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\DS1302.OBJ)
+     00h     1a84h     1a9ah    0017h      CODE               _Write_Ds1302_Byte (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\DS1302.OBJ)
+     00h     1a9bh     1aach    0012h      CODE               _Write_Ds1302 (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\DS1302.OBJ)
+     00h     1aadh     1ac6h    001ah      CODE               _ds1302_readbyte (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\DS1302.OBJ)
+     00h     1ac7h     1aeah    0024h      CODE               _Read_Ds1302 (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\DS1302.OBJ)
+     00h     1aebh     1b07h    001dh      CODE               _Read_RTC (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\DS1302.OBJ)
+     00h     1b08h     1b4ch    0045h      CODE               _Set_RTC (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\DS1302.OBJ)
+     00h     1b4dh     1b70h    0024h      CODE               _init_ds1302 (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\DS1302.OBJ)
+     00h     1b71h     1b85h    0015h      CODE               _TM1638_Write (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\TM1638.OBJ)
+     00h     1b86h     1b8dh    0008h      CODE               _Write_COM (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\TM1638.OBJ)
+     00h     1b8eh     1b9ch    000fh      CODE               _Write_DATA (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\TM1638.OBJ)
+     00h     1b9dh     1bafh    0013h      CODE               _EEPROM_ByteWrite (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\EEPROM.OBJ)
+     00h     1bb0h     1bc0h    0011h      CODE               _EEPROM_ByteRead (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\EEPROM.OBJ)
+     00h     1bc1h     1bcah    000ah      CODE               __DELAYX (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V7.x\LIB\LIBHOLTEKGCC.LIB)
+     00h     1bcbh     1bd8h    000eh      CODE               _builtin_holtek_delay_isr00 (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V7.x\LIB\LIBHOLTEKGCC.LIB)
+     00h     1bd9h     1bfdh    0025h      CODE               _builtin_holtek_divmodqi4_isr00 (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V7.x\LIB\LIBHOLTEKGCC.LIB)
+     00h     1bfeh     1c34h    0037h      CODE               _builtin_holtek_divmodhi4_isr00 (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V7.x\LIB\LIBHOLTEKGCC.LIB)
+     00h     1c35h     1c44h    0010h      CODE               _CROM2PROM (CROM2PROM)
      00h     0080h     00b2h    0033h      DATA     0.7058    TKS_LIBRARY_DATA0 (C:\Users\Lgy\AppData\Local\Temp\BS67F350_LIBV413.OBJ)
      00h     00b3h     00b4h    0002h      DATA     3         MAIN_DATA (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\MAIN_PROGRAM_V104.OBJ)
-     00h     00b5h     00b6h    0002h      DATA     46.5      @BITDATASEC (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     00h     00b7h     00b7h    0001h      DATA     224       @data_ra (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V7.x\LIB\LIBHOLTEKGCC.LIB)
+     00h     00b5h     00b6h    0002h      DATA     47        @BITDATASEC (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     00h     00b7h     00b7h    0001h      DATA     228       @data_ra (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V7.x\LIB\LIBHOLTEKGCC.LIB)
      00h     00b8h     00b8h    0001h      DATA     321       @data_rb (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V7.x\LIB\LIBHOLTEKGCC.LIB)
      00h     00b9h     00b9h    0001h      DATA     288       @data_rc (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V7.x\LIB\LIBHOLTEKGCC.LIB)
      00h     00bah     00bah    0001h      DATA     199       @data_rd (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V7.x\LIB\LIBHOLTEKGCC.LIB)
@@ -146,7 +146,7 @@ Input Library File: C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V7.x
      01h     00cah     00d0h    0007h      DATA     1         @HCCINIT_get_time (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
      01h     00d1h     00e0h    0010h      DATA     1.375     @HCCINIT_display_numer (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
      01h     00e1h     00e2h    0002h      DATA     5         @HCCINIT_contirm_delay (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     01h     00e3h     00e3h    0001h      DATA     14        @HCCINIT_set_week_schedule_flag (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     01h     00e3h     00e3h    0001h      DATA     12        @HCCINIT_set_week_schedule_flag (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
      01h     00e4h     00e4h    0001h      DATA     0         @HCCINIT_ADCcount (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\NTC.OBJ)
      01h     00e5h     00e5h    0001h      DATA     1         @HCCINIT_index1 (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\NTC.OBJ)
      01h     00e6h     00e7h    0002h      DATA     2         @HCCINIT_ADC_VALUE (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\NTC.OBJ)
@@ -246,12 +246,12 @@ Input Library File: C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V7.x
      0028h              _BS67F350_LIBV413_INITIAL
      00b5h[7]           _B_2ms
      00f9h              _CHECK_KEY_WAKEUP
-     1c3ah              _Crom2Prom
-     1c39h              _Crom2PromNext
+     1c36h              _Crom2Prom
+     1c35h              _Crom2PromNext
      0097h              _DATA_BUF
-     1a70h              _Data_ToBCD
-     1bb4h              _EEPROM_ByteRead
-     1ba1h              _EEPROM_ByteWrite
+     1a6ch              _Data_ToBCD
+     1bb0h              _EEPROM_ByteRead
+     1b9dh              _EEPROM_ByteWrite
      00aah[0]           _FORCE_CALIBRATEF
      0303h              _GET_ENV_VALUE
      02fdh              _GET_KEY_AMOUNT
@@ -260,9 +260,9 @@ Input Library File: C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V7.x
      0302h              _GET_RCC_VALUE
      0305h              _GET_REF_VALUE
      0080h              _GLOBE_VARIES
-     19b7h              _GetAdToTempature
-     1a39h              _GetTemp
-     17e3h              _INT0
+     19b3h              _GetAdToTempature
+     1a35h              _GetTemp
+     17dfh              _INT0
      00a5h              _KEY_DATA
      00a2h              _KEY_IO_SEL
      0380h              _KEY_REF
@@ -270,54 +270,54 @@ Input Library File: C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V7.x
      0028h              _LIBRARY_RESET
      0619h              _LOAD_HXT_REFERENCE
      0619h              _LOAD_TKS_GLOBE_VARIES
-     1acbh              _Read_Ds1302
-     1aefh              _Read_RTC
+     1ac7h              _Read_Ds1302
+     1aebh              _Read_RTC
      009fh              _SAMPLE_TIMES
      00aah[2]           _SCAN_CYCLEF
      00a0h              _STANDBY_TIME
      0d00h              _SendString
-     1b0ch              _Set_RTC
+     1b08h              _Set_RTC
      00aah[5]           _TKS_250MSF
      00aah[6]           _TKS_500MSF
      00aah[4]           _TKS_63MSF
      00aah[1]           _TKS_ACTIVEF
      00aah              _TKS_FLAGA
      00a1h              _TKS_TIME_BASE
-     1b75h              _TM1638_Write
+     1b71h              _TM1638_Write
      06e5h              _TimeValueCount
      0d0fh              _UART_Init
      0cf7h              _UART_SendChar
      10fah              _USER_PROGRAM
      105ch              _USER_PROGRAM_INITIAL
-     1b8ah              _Write_COM
-     1b92h              _Write_DATA
-     1a9fh              _Write_Ds1302
-     1a88h              _Write_Ds1302_Byte
-     1bc8h              __DELAYX0
-     1bc7h              __DELAYX1
-     1bc7h              __DELAYX2
-     1bc6h              __DELAYX3
-     1bc6h              __DELAYX4
-     1bc5h              __DELAYX5
-     1bc5h              __DELAYX6
-     1bd1h              __DELAYY0_isr00
-     1bd1h              __DELAYY1_isr00
-     1bd0h              __DELAYY2_isr00
-     1bd0h              __DELAYY3_isr00
-     1bcfh              __DELAYY4_isr00
-     1bcfh              __DELAYY5_isr00
+     1b86h              _Write_COM
+     1b8eh              _Write_DATA
+     1a9bh              _Write_Ds1302
+     1a84h              _Write_Ds1302_Byte
+     1bc4h              __DELAYX0
+     1bc3h              __DELAYX1
+     1bc3h              __DELAYX2
+     1bc2h              __DELAYX3
+     1bc2h              __DELAYX4
+     1bc1h              __DELAYX5
+     1bc1h              __DELAYX6
+     1bcdh              __DELAYY0_isr00
+     1bcdh              __DELAYY1_isr00
+     1bcch              __DELAYY2_isr00
+     1bcch              __DELAYY3_isr00
+     1bcbh              __DELAYY4_isr00
+     1bcbh              __DELAYY5_isr00
      00eah              _adjust_time_index
      01eah              _adjust_time_intercal_index
      01ebh              _adjust_week_index
      00b5h[1]           _backstage_add_flag
      00b5h[0]           _backstage_sub_flag
-     1c02h              _builtin_holtek_divmodhi4_isr00
-     1bddh              _builtin_holtek_divmodqi4_isr00
-     1c0bh              _builtin_holtek_udivmodhi4_isr00
-     1be3h              _builtin_holtek_udivmodqi4_isr00
+     1bfeh              _builtin_holtek_divmodhi4_isr00
+     1bd9h              _builtin_holtek_divmodqi4_isr00
+     1c07h              _builtin_holtek_udivmodhi4_isr00
+     1bdfh              _builtin_holtek_udivmodqi4_isr00
      00f5h              _check_long_key_flag
      00fbh              _control_delay
-     185eh              _ctm0
+     185ah              _ctm0
      01c8h              _ctm0_count
      00f4h              _ctm_500ms_flag
      0cc2h              _ctm_init
@@ -342,17 +342,17 @@ Input Library File: C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V7.x
      00e2h              _display_set_tempture_2
      0d5dh              _display_update
      00edh              _down_key_hold_ms
-     1ab1h              _ds1302_readbyte
+     1aadh              _ds1302_readbyte
      02d0h              _filter_buf
-     1942h              _get_adc_value
+     193eh              _get_adc_value
      01bfh              _get_new_hour_range
      01beh              _get_new_minute_range
      01cah              _get_time
-     192bh              _getad
+     1927h              _getad
      00b6h[2]           _hengwen_flag
      01e5h              _index1
      0cb1h              _init_TM1638
-     1b51h              _init_ds1302
+     1b4dh              _init_ds1302
      0008h              _init_time
      00fch              _int0_count
      00b6h[0]           _int0_flag
@@ -370,7 +370,7 @@ Input Library File: C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V7.x
      0d73h              _lvd_init
      01ech              _m
      00e9h              _new_sec
-     1923h              _ntcinit
+     191fh              _ntcinit
      0f7ch              _read_eeprom_schedule
      01c3h              _seg_hour
      01c1h              _seg_minute
@@ -393,7 +393,7 @@ Input Library File: C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V7.x
      00b6h[6]           _start_system
      00ffh              _start_tempture
      00efh              _startup_key_hold_ms
-     18aeh              _stm0
+     18aah              _stm0
      01c4h              _stm_count
      01c6h              _stm_flag
      0cceh              _stm_init
@@ -594,51 +594,51 @@ Input Library File: C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V7.x
      0fdeh              _select_model_
      105ch              _USER_PROGRAM_INITIAL
      10fah              _USER_PROGRAM
-     17e3h              _INT0
-     185eh              _ctm0
-     18aeh              _stm0
-     1923h              _ntcinit
-     192bh              _getad
-     1942h              _get_adc_value
-     19b7h              _GetAdToTempature
-     1a39h              _GetTemp
-     1a70h              _Data_ToBCD
-     1a88h              _Write_Ds1302_Byte
-     1a9fh              _Write_Ds1302
-     1ab1h              _ds1302_readbyte
-     1acbh              _Read_Ds1302
-     1aefh              _Read_RTC
-     1b0ch              _Set_RTC
-     1b51h              _init_ds1302
-     1b75h              _TM1638_Write
-     1b8ah              _Write_COM
-     1b92h              _Write_DATA
-     1ba1h              _EEPROM_ByteWrite
-     1bb4h              _EEPROM_ByteRead
-     1bc5h              __DELAYX6
-     1bc5h              __DELAYX5
-     1bc6h              __DELAYX4
-     1bc6h              __DELAYX3
-     1bc7h              __DELAYX2
-     1bc7h              __DELAYX1
-     1bc8h              __DELAYX0
-     1bcfh              __DELAYY5_isr00
-     1bcfh              __DELAYY4_isr00
-     1bd0h              __DELAYY3_isr00
-     1bd0h              __DELAYY2_isr00
-     1bd1h              __DELAYY1_isr00
-     1bd1h              __DELAYY0_isr00
-     1bddh              _builtin_holtek_divmodqi4_isr00
-     1be3h              _builtin_holtek_udivmodqi4_isr00
-     1c02h              _builtin_holtek_divmodhi4_isr00
-     1c0bh              _builtin_holtek_udivmodhi4_isr00
-     1c39h              _Crom2PromNext
-     1c3ah              _Crom2Prom
+     17dfh              _INT0
+     185ah              _ctm0
+     18aah              _stm0
+     191fh              _ntcinit
+     1927h              _getad
+     193eh              _get_adc_value
+     19b3h              _GetAdToTempature
+     1a35h              _GetTemp
+     1a6ch              _Data_ToBCD
+     1a84h              _Write_Ds1302_Byte
+     1a9bh              _Write_Ds1302
+     1aadh              _ds1302_readbyte
+     1ac7h              _Read_Ds1302
+     1aebh              _Read_RTC
+     1b08h              _Set_RTC
+     1b4dh              _init_ds1302
+     1b71h              _TM1638_Write
+     1b86h              _Write_COM
+     1b8eh              _Write_DATA
+     1b9dh              _EEPROM_ByteWrite
+     1bb0h              _EEPROM_ByteRead
+     1bc1h              __DELAYX6
+     1bc1h              __DELAYX5
+     1bc2h              __DELAYX4
+     1bc2h              __DELAYX3
+     1bc3h              __DELAYX2
+     1bc3h              __DELAYX1
+     1bc4h              __DELAYX0
+     1bcbh              __DELAYY5_isr00
+     1bcbh              __DELAYY4_isr00
+     1bcch              __DELAYY3_isr00
+     1bcch              __DELAYY2_isr00
+     1bcdh              __DELAYY1_isr00
+     1bcdh              __DELAYY0_isr00
+     1bd9h              _builtin_holtek_divmodqi4_isr00
+     1bdfh              _builtin_holtek_udivmodqi4_isr00
+     1bfeh              _builtin_holtek_divmodhi4_isr00
+     1c07h              _builtin_holtek_udivmodhi4_isr00
+     1c35h              _Crom2PromNext
+     1c36h              _Crom2Prom
 
 
 ROM Usage Statistics
      Size      Used     Percentage
-     2000h     1c47h    88%
+     2000h     1c43h    88%
 
 RAM Usage Statistics
     Bank      Size      Used     Percentage

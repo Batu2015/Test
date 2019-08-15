@@ -1156,7 +1156,7 @@ void USER_PROGRAM_INITIAL()
 	}
       
     display_update();
-    
+     
     delay_ms(500);
     display_off_all_led();
     display_update();
@@ -1558,7 +1558,6 @@ void USER_PROGRAM()
 	  		
 	  	}
 
-	  	
 	    if(int0_flag == 1 && key_lock_flag != 1 && confirm_lock_key_flag != 1 && start_system == 0 && set_week_schedule_flag == 0)
 	    {
 	    	int0_flag = 0;
@@ -1582,7 +1581,7 @@ void USER_PROGRAM()
 		  	
 	    }
 						
-		if( long_startup_key_flag == 0 && start_system == 0 && set_week_schedule_flag == 0)//没有锁定下
+		if( long_startup_key_flag == 0 && start_system == 0 && set_week_schedule_flag == 0 && key_lock_flag != 1 )//没有锁定下
 		{
 			if((DATA_BUF[1] & 0x20) == 0x20 && confirm_lock_key_flag != 1)//key14 第二个按键 模式选择按键
 			{
@@ -1595,7 +1594,8 @@ void USER_PROGRAM()
 					model_key_flag = 0;
 					model_lock_flag = 1;
 					model_index++;
-					if(model_index > 5){
+					if(model_index > 5)
+					{
 						model_index = 1;	
 					}
 					key_model_select(model_index);
@@ -1605,12 +1605,9 @@ void USER_PROGRAM()
 			}
 		}
 		
-		if(long_startup_key_flag == 0 && start_system == 0 && model_index != 5 && confirm_lock_key_flag != 1) //没有锁定下 自加一
+		if(long_startup_key_flag == 0 && start_system == 0 && model_index != 5 && confirm_lock_key_flag != 1) //没有锁定下 自加减一
 		{
-		//	if(B_1ms == 1)
-			{
-			//	B_1ms = 0;	
-			
+
 				if((DATA_BUF[1] & 0x40) == 0x40)
 				{
 					
@@ -1624,7 +1621,7 @@ void USER_PROGRAM()
 		    				set_temp_add();	
 		    			//	EEPROM_ByteWrite(0x7f,set_tempture_value);	
 		    			}
-		    			else if(set_week_schedule_flag != 0)
+		    			else //if(set_week_schedule_flag == 0)
 		    			{
 		    				set_temp_add();	
 		    				//check_long_key_flag = 1;//判断设置周模式时，长按标志位				
@@ -1647,46 +1644,44 @@ void USER_PROGRAM()
 	    				key_add_flag = 0;
 	    				up_key_hold_ms = 0;	
 	    				check_long_key_flag = 0;
-	    				
+	    				//	UART_SendChar(0x32);
 				}
 			
 			
-			 if((DATA_BUF[1] & 0x80) == 0x80)//key16 down 第四个按键 自减一
-			  {
-			  	
+				if((DATA_BUF[1] & 0x80) == 0x80)//key16 down 第四个按键 自减一
+				{
+				
 				down_key_hold_ms++;	
-
-		       if(down_key_hold_ms > 15 && down_key_hold_ms < 4000 )//时间大于50小于100表示短触摸
-	    		{
-	    			down_key_hold_ms = 0;
-	    		
-	    			if(hengwen_flag == 1){
-    				 set_temp_sub();
-    				 //EEPROM_ByteWrite(0x7f,set_tempture_value);		
-	    			}
-	    			else if(set_week_schedule_flag != 0)
-	    			{
-	    				set_temp_sub();			
-	    			}
-	    			key_sub_flag = 1;
-	    			check_long_key_flag = 1;
-	    							    			
-	    		}	
-		    		
-			  }	
-			  else if(key_sub_flag == 1  || (down_key_hold_ms>= 1 && down_key_hold_ms<=15))
+				
+				if(down_key_hold_ms > 15 && down_key_hold_ms < 4000 )//时间大于50小于100表示短触摸
+				{
+					down_key_hold_ms = 0;
+				
+					if(hengwen_flag == 1){
+					 set_temp_sub();
+					 //EEPROM_ByteWrite(0x7f,set_tempture_value);		
+					}
+					else //if(set_week_schedule_flag != 0)
+					{
+						set_temp_sub();			
+					}
+					key_sub_flag = 1;
+					check_long_key_flag = 1;					    			
+				}	
+					
+				}	
+				else if(key_sub_flag == 1  || (down_key_hold_ms>= 1 && down_key_hold_ms<=15))
 				{
 					
 					if(hengwen_flag == 1){
-    				 //set_temp_sub();
-    				 EEPROM_ByteWrite(0x7f,set_tempture_value);		
-	    			}
+					 //set_temp_sub();
+					 EEPROM_ByteWrite(0x7f,set_tempture_value);		
+					}
 				
 					key_sub_flag = 0;
 					down_key_hold_ms = 0;
 					check_long_key_flag = 0;	
-				}
-			}	  
+				}	  
 		}
 				
 		if(short_startup_key_flag != 1 && start_system == 1 && key_confirm_flag != 1)//后台管理功能
@@ -1703,9 +1698,7 @@ void USER_PROGRAM()
 				
 			*/
 			//刷新led显示
-			{
 
-			}
 		
 			if(((DATA_BUF[1] & 0x40) == 0x40) && ((DATA_BUF[1] & 0x20) == 0x20) && ((DATA_BUF[2] & 0x01) == 0x01))//2 3 5三个按键
 			{
