@@ -57,7 +57,7 @@ unsigned char set_week_schedule_flag = 0;//周计划
 2.2分钟设置灯的亮度为0x88
 3.5分钟后设置为只显示实时温度值
 4.按键扫描上按短按
-
+5.密码锁定，十六进制四位密码，默认初始密码：0000
 *************************************************************/
 bit start_system = 0;
 
@@ -156,6 +156,8 @@ bit backstage_add_flag = 0;
 bit backstage_sub_flag = 0;
 unsigned int set_Serial_number = 0;
 
+//密码锁定 4位，十六进制
+unsigned char coded_lock[4] = {0};
 
 //
 void delay_ms(u16 ms)
@@ -863,10 +865,7 @@ void set_temp_add()
 			break;	
 		}
 		case 5:
-		{//  set_week_schedule[i][j].end_time < seg_hour <= 24
-		// get_new_hour_range <= seg_hour <= 24
-		// get_new_minute + 30 <= seg_minute
-		
+		{		
 			seg_minute= seg_minute+30;
 			if(seg_minute >= 60)
 			{
@@ -936,7 +935,6 @@ void set_temp_sub()
 			
 			if(get_new_minute_range == 30)
 			{
-
 				if(seg_hour <= get_new_hour_range-1 && seg_minute == 30 )
 				{
 					seg_hour = 24;
@@ -949,8 +947,7 @@ void set_temp_sub()
 				{
 					seg_hour = 24;
 					seg_minute=0;		
-				}
-				
+				}	
 			}
 			
 			break;	
@@ -1096,6 +1093,8 @@ void USER_PROGRAM_INITIAL()
 	SCR_CONTROL = 1;
 	LED_detection = 0;
 	
+
+	
 	set_Serial_number = 0;//后台功能序号
 	temp_vaule = EEPROM_ByteRead(0x7e);
 	if(temp_vaule >= 85 || temp_vaule <= 5)
@@ -1119,9 +1118,6 @@ void USER_PROGRAM_INITIAL()
 	
 	key_lock_flag = 0;
 	
-//	 seg_hour = 23;
-//	 seg_second = 0;
-//	 seg_minute = 58;
 	 seg_week = 1;
 	 
 	 set_tempture_value =5;
@@ -1162,8 +1158,6 @@ void USER_PROGRAM_INITIAL()
     display_update();
     delay_ms(500);
     
-
-
 	
 	read_eeprom_schedule();
 	delay_ms(100);	
@@ -1174,21 +1168,22 @@ void USER_PROGRAM_INITIAL()
 		delay_ms(100);			
 	}
 		
-	for(i = 0; i<3;i++)
+	//上电后读取密码锁的值 0x00== 不锁定按键，否则需要输入密码
+	coded_lock[0] = 0x00;//初始化默认是0x0000
+	coded_lock[1] = 0x00;
+	coded_lock[2] = 0x00;
+	coded_lock[3] = 0x00;
+	
+	if(EEPROM_ByteRead(0x7a) == 0xff || EEPROM_ByteRead(0x7b) == 0xff || EEPROM_ByteRead(0x7c) == 0xff || EEPROM_ByteRead(0x7d) == 0xff)
 	{
-		if(set_week_schedule[i][0].set_temp == 0xff)
-		{
-					
-		}
-//		UART_SendChar(set_week_schedule[0][i].enable);
-//		UART_SendChar(set_week_schedule[0][i].set_temp);
-//		UART_SendChar(set_week_schedule[0][i].start_time);
-//		UART_SendChar(set_week_schedule[0][i].end_time);
-		
+		EEPROM_ByteWrite(0x7a,coded_lock[0]);
+		EEPROM_ByteWrite(0x7b,coded_lock[1]);
+		EEPROM_ByteWrite(0x7c,coded_lock[2]);
+		EEPROM_ByteWrite(0x7d,coded_lock[3]);
 	}
 	
 	
-	//恒温模式下读取温度值
+	//恒温模式下读取eeprom温度值
 	if(EEPROM_ByteRead(0x7f) == 0xff) {
 		EEPROM_ByteWrite(0x7f,set_tempture_value);
 	}
@@ -1200,9 +1195,6 @@ void USER_PROGRAM_INITIAL()
 	delay_num = 0;
 	SCR_CONTROL = 1;
 	_ston = 0;
-								
-//	EEPROM_ByteWrite(0x00,1);
-//	uchar get_ee_data = EEPROM_ByteRead(0x00);
 
 
 }
@@ -1519,7 +1511,6 @@ void USER_PROGRAM()
 			
 			if(ctm_500ms_flag == 1 ) //500ms闪烁一次 //长按标志位置位后就不关闭led
 			{
-		
 				set_display_time();			
 			}
 			else 
@@ -1612,19 +1603,19 @@ void USER_PROGRAM()
 				{
 					
 					up_key_hold_ms++;
-					//	UART_SendChar(0x31);	
+						
 		    		if(up_key_hold_ms > 10 && up_key_hold_ms < 3000 )//时间大于50小于100表示短触摸
 		    		{	
-		    		//	UART_SendChar(0x30);	
+		    			
 		    			up_key_hold_ms = 0;
 		    			if(hengwen_flag == 1){
 		    				set_temp_add();	
-		    			//	EEPROM_ByteWrite(0x7f,set_tempture_value);	
+		    		
 		    			}
-		    			else //if(set_week_schedule_flag == 0)
+		    			else 
 		    			{
 		    				set_temp_add();	
-		    				//check_long_key_flag = 1;//判断设置周模式时，长按标志位				
+		    							
 		    			}
 					
 						key_add_flag = 1;
@@ -1636,7 +1627,7 @@ void USER_PROGRAM()
 				else if (key_add_flag == 1 || (up_key_hold_ms >= 1 && up_key_hold_ms <=10))
 				{
 						if(hengwen_flag == 1){
-		    			//	set_temp_add();	
+		    			
 		    				EEPROM_ByteWrite(0x7f,set_tempture_value);	
 		    			}
 	
@@ -1644,7 +1635,7 @@ void USER_PROGRAM()
 	    				key_add_flag = 0;
 	    				up_key_hold_ms = 0;	
 	    				check_long_key_flag = 0;
-	    				//	UART_SendChar(0x32);
+	    				
 				}
 			
 			
@@ -1659,7 +1650,7 @@ void USER_PROGRAM()
 				
 					if(hengwen_flag == 1){
 					 set_temp_sub();
-					 //EEPROM_ByteWrite(0x7f,set_tempture_value);		
+						
 					}
 					else //if(set_week_schedule_flag != 0)
 					{
@@ -1674,7 +1665,7 @@ void USER_PROGRAM()
 				{
 					
 					if(hengwen_flag == 1){
-					 //set_temp_sub();
+					
 					 EEPROM_ByteWrite(0x7f,set_tempture_value);		
 					}
 				
@@ -1706,10 +1697,7 @@ void USER_PROGRAM()
 			}
 			
 			if(set_backstage_flag == 1)
-			//else
-			{
-			//	GET_KEY_BITMAP();
-				
+			{			
 	
 						
 				//if(set_backstage_flag == 1)
@@ -1727,7 +1715,7 @@ void USER_PROGRAM()
 						{
 							set_display_num_flag = 0;
 							set_Serial_number++;
-							if(set_Serial_number >4)set_Serial_number=4;
+							if(set_Serial_number >4)set_Serial_number=0;
 						//	display_set_tempture(set_Serial_number);				
 						}	
 					}
@@ -1834,7 +1822,7 @@ void USER_PROGRAM()
 			if(hengwen_flag == 1){
 				display_set_tempture(set_tempture_value);	
 			}
-			//	display_set_tempture(set_tempture_value);
+			
 			display_update();
 		}	  	
 		

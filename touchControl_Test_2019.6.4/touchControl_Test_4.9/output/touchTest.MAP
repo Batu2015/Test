@@ -27,68 +27,68 @@ Input Library File: C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V7.x
      00h     0024h     0027h    0004h      CODE               TIME_BASE_INT (C:\Users\Lgy\AppData\Local\Temp\BS67F350_LIBV413.OBJ)
      00h     0028h     05f6h    05cfh      CODE               TKS_LIBRARY_CODE (C:\Users\Lgy\AppData\Local\Temp\BS67F350_LIBV413.OBJ)
      00h     05f7h     066fh    0079h      CODE               MAIN_PROGRAM (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\MAIN_PROGRAM_V104.OBJ)
-     00h     0670h     06d1h    0062h      CODE               @ROMDATA_BASE (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     00h     06d2h     0725h    0054h      CODE               @crom (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     00h     0726h     078ah    0065h      CODE               @crom (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\NTC.OBJ)
-     00h     078bh     079ah    0010h      CODE               _delay_ms (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     00h     079bh     0872h    00d8h      CODE               _display_position_led (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     00h     0873h     0904h    0092h      CODE               _display_decimal (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     00h     0905h     0911h    000dh      CODE               _led_light_level (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     00h     0912h     0925h    0014h      CODE               _display_off_all_led (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     00h     0926h     0b08h    01e3h      CODE               _display_num (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     00h     0b09h     0b3bh    0033h      CODE               _display_RTC_time (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     00h     0b3ch     0b5eh    0023h      CODE               _display_set_tempture (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     00h     0b5fh     0b81h    0023h      CODE               _display_get_NTC_tempture (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     00h     0b82h     0cb0h    012fh      CODE               _set_seg_led_off (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     00h     0cb1h     0cc1h    0011h      CODE               _init_TM1638 (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     00h     0cc2h     0ccdh    000ch      CODE               _ctm_init (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     00h     0cceh     0cf6h    0029h      CODE               _stm_init (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     00h     0cf7h     0cffh    0009h      CODE               _UART_SendChar (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     00h     0d00h     0d0eh    000fh      CODE               _SendString (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     00h     0d0fh     0d1dh    000fh      CODE               _UART_Init (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     00h     0d1eh     0d5ch    003fh      CODE               _key_model_select (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     00h     0d5dh     0d72h    0016h      CODE               _display_update (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     00h     0d73h     0d77h    0005h      CODE               _lvd_init (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     00h     0d78h     0d7dh    0006h      CODE               _system_clock_init (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     00h     0d7eh     0da4h    0027h      CODE               _set_display_time (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     00h     0da5h     0e0bh    0067h      CODE               _set_temp_add (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     00h     0e0ch     0e82h    0077h      CODE               _set_temp_sub (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     00h     0e83h     0f1bh    0099h      CODE               _week_schudule_init (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     00h     0f1ch     0f7bh    0060h      CODE               _write_eeprom_schedule (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     00h     0f7ch     0fddh    0062h      CODE               _read_eeprom_schedule (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     00h     0fdeh     105bh    007eh      CODE               _select_model_ (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     00h     105ch     10f9h    009eh      CODE               _USER_PROGRAM_INITIAL (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     00h     10fah     17deh    06e5h      CODE               _USER_PROGRAM (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     00h     17dfh     1859h    007bh      CODE               _INT0 (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     00h     185ah     18a9h    0050h      CODE               _ctm0 (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     00h     18aah     191eh    0075h      CODE               _stm0 (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     00h     191fh     1926h    0008h      CODE               _ntcinit (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\NTC.OBJ)
-     00h     1927h     193dh    0017h      CODE               _getad (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\NTC.OBJ)
-     00h     193eh     19b2h    0075h      CODE               _get_adc_value (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\NTC.OBJ)
-     00h     19b3h     1a34h    0082h      CODE               _GetAdToTempature (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\NTC.OBJ)
-     00h     1a35h     1a6bh    0037h      CODE               _GetTemp (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\NTC.OBJ)
-     00h     1a6ch     1a83h    0018h      CODE               _Data_ToBCD (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\DS1302.OBJ)
-     00h     1a84h     1a9ah    0017h      CODE               _Write_Ds1302_Byte (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\DS1302.OBJ)
-     00h     1a9bh     1aach    0012h      CODE               _Write_Ds1302 (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\DS1302.OBJ)
-     00h     1aadh     1ac6h    001ah      CODE               _ds1302_readbyte (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\DS1302.OBJ)
-     00h     1ac7h     1aeah    0024h      CODE               _Read_Ds1302 (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\DS1302.OBJ)
-     00h     1aebh     1b07h    001dh      CODE               _Read_RTC (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\DS1302.OBJ)
-     00h     1b08h     1b4ch    0045h      CODE               _Set_RTC (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\DS1302.OBJ)
-     00h     1b4dh     1b70h    0024h      CODE               _init_ds1302 (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\DS1302.OBJ)
-     00h     1b71h     1b85h    0015h      CODE               _TM1638_Write (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\TM1638.OBJ)
-     00h     1b86h     1b8dh    0008h      CODE               _Write_COM (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\TM1638.OBJ)
-     00h     1b8eh     1b9ch    000fh      CODE               _Write_DATA (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\TM1638.OBJ)
-     00h     1b9dh     1bafh    0013h      CODE               _EEPROM_ByteWrite (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\EEPROM.OBJ)
-     00h     1bb0h     1bc0h    0011h      CODE               _EEPROM_ByteRead (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\EEPROM.OBJ)
-     00h     1bc1h     1bcah    000ah      CODE               __DELAYX (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V7.x\LIB\LIBHOLTEKGCC.LIB)
-     00h     1bcbh     1bd8h    000eh      CODE               _builtin_holtek_delay_isr00 (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V7.x\LIB\LIBHOLTEKGCC.LIB)
-     00h     1bd9h     1bfdh    0025h      CODE               _builtin_holtek_divmodqi4_isr00 (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V7.x\LIB\LIBHOLTEKGCC.LIB)
-     00h     1bfeh     1c34h    0037h      CODE               _builtin_holtek_divmodhi4_isr00 (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V7.x\LIB\LIBHOLTEKGCC.LIB)
-     00h     1c35h     1c44h    0010h      CODE               _CROM2PROM (CROM2PROM)
+     00h     0670h     06d3h    0064h      CODE               @ROMDATA_BASE (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     00h     06d4h     0727h    0054h      CODE               @crom (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     00h     0728h     078ch    0065h      CODE               @crom (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\NTC.OBJ)
+     00h     078dh     079ch    0010h      CODE               _delay_ms (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     00h     079dh     0874h    00d8h      CODE               _display_position_led (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     00h     0875h     0906h    0092h      CODE               _display_decimal (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     00h     0907h     0913h    000dh      CODE               _led_light_level (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     00h     0914h     0927h    0014h      CODE               _display_off_all_led (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     00h     0928h     0b0ah    01e3h      CODE               _display_num (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     00h     0b0bh     0b3dh    0033h      CODE               _display_RTC_time (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     00h     0b3eh     0b60h    0023h      CODE               _display_set_tempture (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     00h     0b61h     0b83h    0023h      CODE               _display_get_NTC_tempture (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     00h     0b84h     0cb2h    012fh      CODE               _set_seg_led_off (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     00h     0cb3h     0cc3h    0011h      CODE               _init_TM1638 (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     00h     0cc4h     0ccfh    000ch      CODE               _ctm_init (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     00h     0cd0h     0cf8h    0029h      CODE               _stm_init (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     00h     0cf9h     0d01h    0009h      CODE               _UART_SendChar (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     00h     0d02h     0d10h    000fh      CODE               _SendString (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     00h     0d11h     0d1fh    000fh      CODE               _UART_Init (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     00h     0d20h     0d5eh    003fh      CODE               _key_model_select (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     00h     0d5fh     0d74h    0016h      CODE               _display_update (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     00h     0d75h     0d79h    0005h      CODE               _lvd_init (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     00h     0d7ah     0d7fh    0006h      CODE               _system_clock_init (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     00h     0d80h     0da6h    0027h      CODE               _set_display_time (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     00h     0da7h     0e0dh    0067h      CODE               _set_temp_add (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     00h     0e0eh     0e84h    0077h      CODE               _set_temp_sub (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     00h     0e85h     0f1dh    0099h      CODE               _week_schudule_init (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     00h     0f1eh     0f7dh    0060h      CODE               _write_eeprom_schedule (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     00h     0f7eh     0fdfh    0062h      CODE               _read_eeprom_schedule (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     00h     0fe0h     105dh    007eh      CODE               _select_model_ (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     00h     105eh     112ah    00cdh      CODE               _USER_PROGRAM_INITIAL (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     00h     112bh     1813h    06e9h      CODE               _USER_PROGRAM (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     00h     1814h     1895h    0082h      CODE               _INT0 (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     00h     1896h     18e5h    0050h      CODE               _ctm0 (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     00h     18e6h     195ah    0075h      CODE               _stm0 (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     00h     195bh     1962h    0008h      CODE               _ntcinit (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\NTC.OBJ)
+     00h     1963h     1979h    0017h      CODE               _getad (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\NTC.OBJ)
+     00h     197ah     19eeh    0075h      CODE               _get_adc_value (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\NTC.OBJ)
+     00h     19efh     1a70h    0082h      CODE               _GetAdToTempature (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\NTC.OBJ)
+     00h     1a71h     1aa7h    0037h      CODE               _GetTemp (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\NTC.OBJ)
+     00h     1aa8h     1abfh    0018h      CODE               _Data_ToBCD (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\DS1302.OBJ)
+     00h     1ac0h     1ad6h    0017h      CODE               _Write_Ds1302_Byte (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\DS1302.OBJ)
+     00h     1ad7h     1ae8h    0012h      CODE               _Write_Ds1302 (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\DS1302.OBJ)
+     00h     1ae9h     1b02h    001ah      CODE               _ds1302_readbyte (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\DS1302.OBJ)
+     00h     1b03h     1b26h    0024h      CODE               _Read_Ds1302 (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\DS1302.OBJ)
+     00h     1b27h     1b43h    001dh      CODE               _Read_RTC (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\DS1302.OBJ)
+     00h     1b44h     1b88h    0045h      CODE               _Set_RTC (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\DS1302.OBJ)
+     00h     1b89h     1bach    0024h      CODE               _init_ds1302 (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\DS1302.OBJ)
+     00h     1badh     1bc1h    0015h      CODE               _TM1638_Write (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\TM1638.OBJ)
+     00h     1bc2h     1bc9h    0008h      CODE               _Write_COM (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\TM1638.OBJ)
+     00h     1bcah     1bd8h    000fh      CODE               _Write_DATA (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\TM1638.OBJ)
+     00h     1bd9h     1bebh    0013h      CODE               _EEPROM_ByteWrite (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\EEPROM.OBJ)
+     00h     1bech     1bfch    0011h      CODE               _EEPROM_ByteRead (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\EEPROM.OBJ)
+     00h     1bfdh     1c06h    000ah      CODE               __DELAYX (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V7.x\LIB\LIBHOLTEKGCC.LIB)
+     00h     1c07h     1c14h    000eh      CODE               _builtin_holtek_delay_isr00 (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V7.x\LIB\LIBHOLTEKGCC.LIB)
+     00h     1c15h     1c39h    0025h      CODE               _builtin_holtek_divmodqi4_isr00 (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V7.x\LIB\LIBHOLTEKGCC.LIB)
+     00h     1c3ah     1c70h    0037h      CODE               _builtin_holtek_divmodhi4_isr00 (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V7.x\LIB\LIBHOLTEKGCC.LIB)
+     00h     1c71h     1c80h    0010h      CODE               _CROM2PROM (CROM2PROM)
      00h     0080h     00b2h    0033h      DATA     0.7058    TKS_LIBRARY_DATA0 (C:\Users\Lgy\AppData\Local\Temp\BS67F350_LIBV413.OBJ)
      00h     00b3h     00b4h    0002h      DATA     3         MAIN_DATA (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\MAIN_PROGRAM_V104.OBJ)
      00h     00b5h     00b6h    0002h      DATA     47        @BITDATASEC (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     00h     00b7h     00b7h    0001h      DATA     228       @data_ra (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V7.x\LIB\LIBHOLTEKGCC.LIB)
+     00h     00b7h     00b7h    0001h      DATA     236       @data_ra (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V7.x\LIB\LIBHOLTEKGCC.LIB)
      00h     00b8h     00b8h    0001h      DATA     321       @data_rb (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V7.x\LIB\LIBHOLTEKGCC.LIB)
      00h     00b9h     00b9h    0001h      DATA     288       @data_rc (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V7.x\LIB\LIBHOLTEKGCC.LIB)
      00h     00bah     00bah    0001h      DATA     199       @data_rd (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V7.x\LIB\LIBHOLTEKGCC.LIB)
@@ -110,50 +110,51 @@ Input Library File: C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V7.x
      00h     00cah     00cah    0001h      DATA     2         @data_r218 (isr:ra~rh)
      00h     00cbh     00cbh    0001h      DATA     5         @data_rb18 (isr:ra~rh)
      00h     00cch     00cch    0001h      DATA     6         @data_rc18 (isr:ra~rh)
-     00h     00e6h     00e7h    0002h      DATA     10        @HCCINIT_set_Serial_number (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     00h     00e8h     00e8h    0001h      DATA     2         @HCCINIT_last_sec (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     00h     00e9h     00e9h    0001h      DATA     1         @HCCINIT_new_sec (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     00h     00eah     00eah    0001h      DATA     21        @HCCINIT_adjust_time_index (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     00h     00ebh     00ech    0002h      DATA     7         @HCCINIT_up_key_hold_ms (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     00h     00edh     00eeh    0002h      DATA     7         @HCCINIT_down_key_hold_ms (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     00h     00efh     00f0h    0002h      DATA     6         @HCCINIT_startup_key_hold_ms (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     00h     00f1h     00f1h    0001h      DATA     8         @HCCINIT_long_startup_key_flag (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     00h     00f2h     00f3h    0002h      DATA     6         @HCCINIT_key_hold_ms (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     00h     00f4h     00f4h    0001h      DATA     6         @HCCINIT_ctm_500ms_flag (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     00h     00f5h     00f5h    0001h      DATA     5         @HCCINIT_check_long_key_flag (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     00h     00f6h     00f6h    0001h      DATA     3         @HCCINIT_key_sub_flag (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     00h     00f7h     00f7h    0001h      DATA     3         @HCCINIT_key_add_flag (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     00h     00f8h     00f8h    0001h      DATA     3         @HCCINIT_model_lock_flag (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     00h     00f9h     00f9h    0001h      DATA     3         @HCCINIT_model_key_flag (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     00h     00fah     00fah    0001h      DATA     11        @HCCINIT_model_index (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     00h     00fbh     00fbh    0001h      DATA     3         @HCCINIT_control_delay (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     00h     00fch     00fch    0001h      DATA     3         @HCCINIT_int0_count (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     00h     00fdh     00fdh    0001h      DATA     6         @HCCINIT_current_tempture (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     00h     00feh     00feh    0001h      DATA     3         @HCCINIT_stop_tempture (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     00h     00ffh     00ffh    0001h      DATA     3         @HCCINIT_start_tempture (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     00h     00e6h     00e9h    0004h      DATA     2         @HCCINIT_coded_lock (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     00h     00eah     00ebh    0002h      DATA     10        @HCCINIT_set_Serial_number (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     00h     00ech     00ech    0001h      DATA     2         @HCCINIT_last_sec (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     00h     00edh     00edh    0001h      DATA     1         @HCCINIT_new_sec (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     00h     00eeh     00eeh    0001h      DATA     21        @HCCINIT_adjust_time_index (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     00h     00efh     00f0h    0002h      DATA     7         @HCCINIT_up_key_hold_ms (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     00h     00f1h     00f2h    0002h      DATA     7         @HCCINIT_down_key_hold_ms (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     00h     00f3h     00f4h    0002h      DATA     6         @HCCINIT_startup_key_hold_ms (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     00h     00f5h     00f5h    0001h      DATA     8         @HCCINIT_long_startup_key_flag (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     00h     00f6h     00f7h    0002h      DATA     6         @HCCINIT_key_hold_ms (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     00h     00f8h     00f8h    0001h      DATA     6         @HCCINIT_ctm_500ms_flag (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     00h     00f9h     00f9h    0001h      DATA     5         @HCCINIT_check_long_key_flag (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     00h     00fah     00fah    0001h      DATA     3         @HCCINIT_key_sub_flag (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     00h     00fbh     00fbh    0001h      DATA     3         @HCCINIT_key_add_flag (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     00h     00fch     00fch    0001h      DATA     3         @HCCINIT_model_lock_flag (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     00h     00fdh     00fdh    0001h      DATA     3         @HCCINIT_model_key_flag (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     00h     00feh     00feh    0001h      DATA     11        @HCCINIT_model_index (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     00h     00ffh     00ffh    0001h      DATA     3         @HCCINIT_control_delay (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
      01h     0080h     00bbh    003ch      DATA     0         TKS_LIBRARY_DATA1 (C:\Users\Lgy\AppData\Local\Temp\BS67F350_LIBV413.OBJ)
-     01h     00bch     00bch    0001h      DATA     14        @HCCINIT_set_tempture_max_value (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     01h     00bdh     00bdh    0001h      DATA     29        @HCCINIT_set_tempture_value (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     01h     00beh     00beh    0001h      DATA     5         @HCCINIT_get_new_minute_range (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     01h     00bfh     00bfh    0001h      DATA     7         @HCCINIT_get_new_hour_range (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     01h     00c0h     00c0h    0001h      DATA     39        @HCCINIT_seg_week (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     01h     00c1h     00c1h    0001h      DATA     28        @HCCINIT_seg_minute (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     01h     00c2h     00c2h    0001h      DATA     0         @HCCINIT_seg_second (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     01h     00c3h     00c3h    0001h      DATA     30        @HCCINIT_seg_hour (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     01h     00c4h     00c5h    0002h      DATA     5         @HCCINIT_stm_count (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     01h     00c6h     00c7h    0002h      DATA     3         @HCCINIT_stm_flag (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     01h     00c8h     00c9h    0002h      DATA     7         @HCCINIT_ctm0_count (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     01h     00cah     00d0h    0007h      DATA     1         @HCCINIT_get_time (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     01h     00d1h     00e0h    0010h      DATA     1.375     @HCCINIT_display_numer (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     01h     00e1h     00e2h    0002h      DATA     5         @HCCINIT_contirm_delay (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     01h     00e3h     00e3h    0001h      DATA     12        @HCCINIT_set_week_schedule_flag (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     01h     00e4h     00e4h    0001h      DATA     0         @HCCINIT_ADCcount (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\NTC.OBJ)
-     01h     00e5h     00e5h    0001h      DATA     1         @HCCINIT_index1 (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\NTC.OBJ)
-     01h     00e6h     00e7h    0002h      DATA     2         @HCCINIT_ADC_VALUE (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\NTC.OBJ)
-     01h     00e8h     00e9h    0002h      DATA     16        @HCCINIT0_delay_num (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     01h     00eah     00eah    0001h      DATA     6         @HCCINIT0_adjust_time_intercal_index (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     01h     00ebh     00ebh    0001h      DATA     1         @HCCINIT0_adjust_week_index (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     01h     00ech     00ech    0001h      DATA     0         @HCCINIT0_m (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\DS1302.OBJ)
+     01h     00bch     00bch    0001h      DATA     3         @HCCINIT_int0_count (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     01h     00bdh     00bdh    0001h      DATA     6         @HCCINIT_current_tempture (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     01h     00beh     00beh    0001h      DATA     3         @HCCINIT_stop_tempture (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     01h     00bfh     00bfh    0001h      DATA     3         @HCCINIT_start_tempture (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     01h     00c0h     00c0h    0001h      DATA     14        @HCCINIT_set_tempture_max_value (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     01h     00c1h     00c1h    0001h      DATA     29        @HCCINIT_set_tempture_value (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     01h     00c2h     00c2h    0001h      DATA     5         @HCCINIT_get_new_minute_range (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     01h     00c3h     00c3h    0001h      DATA     7         @HCCINIT_get_new_hour_range (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     01h     00c4h     00c4h    0001h      DATA     39        @HCCINIT_seg_week (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     01h     00c5h     00c5h    0001h      DATA     28        @HCCINIT_seg_minute (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     01h     00c6h     00c6h    0001h      DATA     0         @HCCINIT_seg_second (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     01h     00c7h     00c7h    0001h      DATA     30        @HCCINIT_seg_hour (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     01h     00c8h     00c9h    0002h      DATA     5         @HCCINIT_stm_count (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     01h     00cah     00cbh    0002h      DATA     3         @HCCINIT_stm_flag (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     01h     00cch     00cdh    0002h      DATA     7         @HCCINIT_ctm0_count (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     01h     00ceh     00d4h    0007h      DATA     1         @HCCINIT_get_time (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     01h     00d5h     00e4h    0010h      DATA     1.375     @HCCINIT_display_numer (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     01h     00e5h     00e6h    0002h      DATA     5         @HCCINIT_contirm_delay (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     01h     00e7h     00e7h    0001h      DATA     12        @HCCINIT_set_week_schedule_flag (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     01h     00e8h     00e8h    0001h      DATA     0         @HCCINIT_ADCcount (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\NTC.OBJ)
+     01h     00e9h     00e9h    0001h      DATA     1         @HCCINIT_index1 (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\NTC.OBJ)
+     01h     00eah     00ebh    0002h      DATA     2         @HCCINIT_ADC_VALUE (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\NTC.OBJ)
+     01h     00ech     00edh    0002h      DATA     16        @HCCINIT0_delay_num (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     01h     00eeh     00eeh    0001h      DATA     6         @HCCINIT0_adjust_time_intercal_index (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     01h     00efh     00efh    0001h      DATA     1         @HCCINIT0_adjust_week_index (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
+     01h     00f0h     00f0h    0001h      DATA     0         @HCCINIT0_m (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\DS1302.OBJ)
      02h     0080h     00cfh    0050h      DATA     0         TKS_LIBRARY_DATA2 (C:\Users\Lgy\AppData\Local\Temp\BS67F350_LIBV413.OBJ)
      02h     00d0h     00f7h    0028h      DATA     0.05      @HCCINIT0_filter_buf (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\NTC.OBJ)
      02h     00f8h     00f8h    0001h      DATA     2         @data_r304 (isr:ra~rh)
@@ -200,7 +201,7 @@ Input Library File: C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V7.x
      00h     00d1h     00dah    000ah      LOCAL    3.9       _read_eeprom_schedule (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
      00h     00d0h     00e0h    0011h      LOCAL    1.5882    _week_schudule_init (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
      00h     00d2h     00d9h    0008h      LOCAL    3.875     _write_eeprom_schedule (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
-     00h     00d0h     00d1h    0002h      LOCAL    5.5       _EEPROM_ByteWrite (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\EEPROM.OBJ)
+     00h     00d0h     00d1h    0002h      LOCAL    7.5       _EEPROM_ByteWrite (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\EEPROM.OBJ)
      00h     00e4h     00e5h    0002h      LOCAL    8.5       _USER_PROGRAM (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\USER_PROGRAM.OBJ)
      00h     00d5h     00d5h    0001h      LOCAL    0         _Data_ToBCD (D:\Test\touchControl_Test_2019.6.4\touchControl_Test_4.9\output\DS1302.OBJ)
      00h     00d0h     00d4h    0005h      LOCAL    10.4      _builtin_holtek_divmodqi4_isr00 (C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V7.x\LIB\LIBHOLTEKGCC.LIB)
@@ -238,20 +239,20 @@ Input Library File: C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V7.x
 
      Public Symbols Information
      Address            Public by Name
-     01e6h              _ADC_VALUE
-     01e4h              _ADCcount
+     01eah              _ADC_VALUE
+     01e8h              _ADCcount
      00aah[3]           _ANY_KEY_PRESSF
-     0726h              _Ad_Value_table
+     0728h              _Ad_Value_table
      0035h              _BS67F350_LIBV413
      0028h              _BS67F350_LIBV413_INITIAL
      00b5h[7]           _B_2ms
      00f9h              _CHECK_KEY_WAKEUP
-     1c36h              _Crom2Prom
-     1c35h              _Crom2PromNext
+     1c72h              _Crom2Prom
+     1c71h              _Crom2PromNext
      0097h              _DATA_BUF
-     1a6ch              _Data_ToBCD
-     1bb0h              _EEPROM_ByteRead
-     1b9dh              _EEPROM_ByteWrite
+     1aa8h              _Data_ToBCD
+     1bech              _EEPROM_ByteRead
+     1bd9h              _EEPROM_ByteWrite
      00aah[0]           _FORCE_CALIBRATEF
      0303h              _GET_ENV_VALUE
      02fdh              _GET_KEY_AMOUNT
@@ -260,9 +261,9 @@ Input Library File: C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V7.x
      0302h              _GET_RCC_VALUE
      0305h              _GET_REF_VALUE
      0080h              _GLOBE_VARIES
-     19b3h              _GetAdToTempature
-     1a35h              _GetTemp
-     17dfh              _INT0
+     19efh              _GetAdToTempature
+     1a71h              _GetTemp
+     1814h              _INT0
      00a5h              _KEY_DATA
      00a2h              _KEY_IO_SEL
      0380h              _KEY_REF
@@ -270,140 +271,141 @@ Input Library File: C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V7.x
      0028h              _LIBRARY_RESET
      0619h              _LOAD_HXT_REFERENCE
      0619h              _LOAD_TKS_GLOBE_VARIES
-     1ac7h              _Read_Ds1302
-     1aebh              _Read_RTC
+     1b03h              _Read_Ds1302
+     1b27h              _Read_RTC
      009fh              _SAMPLE_TIMES
      00aah[2]           _SCAN_CYCLEF
      00a0h              _STANDBY_TIME
-     0d00h              _SendString
-     1b08h              _Set_RTC
+     0d02h              _SendString
+     1b44h              _Set_RTC
      00aah[5]           _TKS_250MSF
      00aah[6]           _TKS_500MSF
      00aah[4]           _TKS_63MSF
      00aah[1]           _TKS_ACTIVEF
      00aah              _TKS_FLAGA
      00a1h              _TKS_TIME_BASE
-     1b71h              _TM1638_Write
-     06e5h              _TimeValueCount
-     0d0fh              _UART_Init
-     0cf7h              _UART_SendChar
-     10fah              _USER_PROGRAM
-     105ch              _USER_PROGRAM_INITIAL
-     1b86h              _Write_COM
-     1b8eh              _Write_DATA
-     1a9bh              _Write_Ds1302
-     1a84h              _Write_Ds1302_Byte
-     1bc4h              __DELAYX0
-     1bc3h              __DELAYX1
-     1bc3h              __DELAYX2
-     1bc2h              __DELAYX3
-     1bc2h              __DELAYX4
-     1bc1h              __DELAYX5
-     1bc1h              __DELAYX6
-     1bcdh              __DELAYY0_isr00
-     1bcdh              __DELAYY1_isr00
-     1bcch              __DELAYY2_isr00
-     1bcch              __DELAYY3_isr00
-     1bcbh              __DELAYY4_isr00
-     1bcbh              __DELAYY5_isr00
-     00eah              _adjust_time_index
-     01eah              _adjust_time_intercal_index
-     01ebh              _adjust_week_index
+     1badh              _TM1638_Write
+     06e7h              _TimeValueCount
+     0d11h              _UART_Init
+     0cf9h              _UART_SendChar
+     112bh              _USER_PROGRAM
+     105eh              _USER_PROGRAM_INITIAL
+     1bc2h              _Write_COM
+     1bcah              _Write_DATA
+     1ad7h              _Write_Ds1302
+     1ac0h              _Write_Ds1302_Byte
+     1c00h              __DELAYX0
+     1bffh              __DELAYX1
+     1bffh              __DELAYX2
+     1bfeh              __DELAYX3
+     1bfeh              __DELAYX4
+     1bfdh              __DELAYX5
+     1bfdh              __DELAYX6
+     1c09h              __DELAYY0_isr00
+     1c09h              __DELAYY1_isr00
+     1c08h              __DELAYY2_isr00
+     1c08h              __DELAYY3_isr00
+     1c07h              __DELAYY4_isr00
+     1c07h              __DELAYY5_isr00
+     00eeh              _adjust_time_index
+     01eeh              _adjust_time_intercal_index
+     01efh              _adjust_week_index
      00b5h[1]           _backstage_add_flag
      00b5h[0]           _backstage_sub_flag
-     1bfeh              _builtin_holtek_divmodhi4_isr00
-     1bd9h              _builtin_holtek_divmodqi4_isr00
-     1c07h              _builtin_holtek_udivmodhi4_isr00
-     1bdfh              _builtin_holtek_udivmodqi4_isr00
-     00f5h              _check_long_key_flag
-     00fbh              _control_delay
-     185ah              _ctm0
-     01c8h              _ctm0_count
-     00f4h              _ctm_500ms_flag
-     0cc2h              _ctm_init
-     00fdh              _current_tempture
+     1c3ah              _builtin_holtek_divmodhi4_isr00
+     1c15h              _builtin_holtek_divmodqi4_isr00
+     1c43h              _builtin_holtek_udivmodhi4_isr00
+     1c1bh              _builtin_holtek_udivmodqi4_isr00
+     00f9h              _check_long_key_flag
+     00e6h              _coded_lock
+     00ffh              _control_delay
+     1896h              _ctm0
+     01cch              _ctm0_count
+     00f8h              _ctm_500ms_flag
+     0cc4h              _ctm_init
+     01bdh              _current_tempture
      0013h              _delay
      03dfh              _delay_2
      000fh              _delay_50us
-     078bh              _delay_ms
+     078dh              _delay_ms
      00d1h              _delay_ms_2
-     01e8h              _delay_num
-     0b09h              _display_RTC_time
-     0873h              _display_decimal
+     01ech              _delay_num
+     0b0bh              _display_RTC_time
+     0875h              _display_decimal
      00cdh              _display_decimal_2
-     0b5fh              _display_get_NTC_tempture
-     0926h              _display_num
+     0b61h              _display_get_NTC_tempture
+     0928h              _display_num
      00d6h              _display_num_2
-     01d1h              _display_numer
-     0912h              _display_off_all_led
-     079bh              _display_position_led
+     01d5h              _display_numer
+     0914h              _display_off_all_led
+     079dh              _display_position_led
      00d0h              _display_position_led_2
-     0b3ch              _display_set_tempture
+     0b3eh              _display_set_tempture
      00e2h              _display_set_tempture_2
-     0d5dh              _display_update
-     00edh              _down_key_hold_ms
-     1aadh              _ds1302_readbyte
+     0d5fh              _display_update
+     00f1h              _down_key_hold_ms
+     1ae9h              _ds1302_readbyte
      02d0h              _filter_buf
-     193eh              _get_adc_value
-     01bfh              _get_new_hour_range
-     01beh              _get_new_minute_range
-     01cah              _get_time
-     1927h              _getad
+     197ah              _get_adc_value
+     01c3h              _get_new_hour_range
+     01c2h              _get_new_minute_range
+     01ceh              _get_time
+     1963h              _getad
      00b6h[2]           _hengwen_flag
-     01e5h              _index1
-     0cb1h              _init_TM1638
-     1b4dh              _init_ds1302
+     01e9h              _index1
+     0cb3h              _init_TM1638
+     1b89h              _init_ds1302
      0008h              _init_time
-     00fch              _int0_count
+     01bch              _int0_count
      00b6h[0]           _int0_flag
      001ch              _int0_init
-     00f7h              _key_add_flag
+     00fbh              _key_add_flag
      00b6h[4]           _key_confirm_flag
-     00f2h              _key_hold_ms
+     00f6h              _key_hold_ms
      00b6h[5]           _key_lock_flag
-     0d1eh              _key_model_select
-     00f6h              _key_sub_flag
-     00e8h              _last_sec
-     0905h              _led_light_level
+     0d20h              _key_model_select
+     00fah              _key_sub_flag
+     00ech              _last_sec
+     0907h              _led_light_level
      00b5h[5]           _long_key_flag
-     00f1h              _long_startup_key_flag
-     0d73h              _lvd_init
-     01ech              _m
-     00e9h              _new_sec
-     191fh              _ntcinit
-     0f7ch              _read_eeprom_schedule
-     01c3h              _seg_hour
-     01c1h              _seg_minute
-     01c2h              _seg_second
-     01c0h              _seg_week
-     0fdeh              _select_model_
-     00e6h              _set_Serial_number
+     00f5h              _long_startup_key_flag
+     0d75h              _lvd_init
+     01f0h              _m
+     00edh              _new_sec
+     195bh              _ntcinit
+     0f7eh              _read_eeprom_schedule
+     01c7h              _seg_hour
+     01c5h              _seg_minute
+     01c6h              _seg_second
+     01c4h              _seg_week
+     0fe0h              _select_model_
+     00eah              _set_Serial_number
      00b5h[3]           _set_backstage_flag
      00b5h[2]           _set_display_num_flag
-     0d7eh              _set_display_time
-     0b82h              _set_seg_led_off
-     0da5h              _set_temp_add
-     0e0ch              _set_temp_sub
-     01bch              _set_tempture_max_value
-     01bdh              _set_tempture_value
+     0d80h              _set_display_time
+     0b84h              _set_seg_led_off
+     0da7h              _set_temp_add
+     0e0eh              _set_temp_sub
+     01c0h              _set_tempture_max_value
+     01c1h              _set_tempture_value
      0480h              _set_week_schedule
-     01e3h              _set_week_schedule_flag
+     01e7h              _set_week_schedule_flag
      00b5h[6]           _short_key_flag
      00b5h[4]           _short_startup_key_flag
      00b6h[6]           _start_system
-     00ffh              _start_tempture
-     00efh              _startup_key_hold_ms
-     18aah              _stm0
-     01c4h              _stm_count
-     01c6h              _stm_flag
-     0cceh              _stm_init
-     00feh              _stop_tempture
-     0d78h              _system_clock_init
-     0720h              _table
-     0726h              _temptab
-     00ebh              _up_key_hold_ms
-     0e83h              _week_schudule_init
-     0f1ch              _write_eeprom_schedule
+     01bfh              _start_tempture
+     00f3h              _startup_key_hold_ms
+     18e6h              _stm0
+     01c8h              _stm_count
+     01cah              _stm_flag
+     0cd0h              _stm_init
+     01beh              _stop_tempture
+     0d7ah              _system_clock_init
+     0722h              _table
+     0728h              _temptab
+     00efh              _up_key_hold_ms
+     0e85h              _week_schudule_init
+     0f1eh              _write_eeprom_schedule
      00b6h[1]           _zhineng_flag
      00c3h              r104
      00c5h              r114
@@ -479,47 +481,48 @@ Input Library File: C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V7.x
      00d1h              _delay_ms_2
      00d6h              _display_num_2
      00e2h              _display_set_tempture_2
-     00e6h              _set_Serial_number
-     00e8h              _last_sec
-     00e9h              _new_sec
-     00eah              _adjust_time_index
-     00ebh              _up_key_hold_ms
-     00edh              _down_key_hold_ms
-     00efh              _startup_key_hold_ms
-     00f1h              _long_startup_key_flag
-     00f2h              _key_hold_ms
-     00f4h              _ctm_500ms_flag
-     00f5h              _check_long_key_flag
-     00f6h              _key_sub_flag
-     00f7h              _key_add_flag
+     00e6h              _coded_lock
+     00eah              _set_Serial_number
+     00ech              _last_sec
+     00edh              _new_sec
+     00eeh              _adjust_time_index
+     00efh              _up_key_hold_ms
+     00f1h              _down_key_hold_ms
+     00f3h              _startup_key_hold_ms
+     00f5h              _long_startup_key_flag
+     00f6h              _key_hold_ms
+     00f8h              _ctm_500ms_flag
+     00f9h              _check_long_key_flag
      00f9h              _CHECK_KEY_WAKEUP
-     00fbh              _control_delay
-     00fch              _int0_count
-     00fdh              _current_tempture
-     00feh              _stop_tempture
-     00ffh              _start_tempture
+     00fah              _key_sub_flag
+     00fbh              _key_add_flag
+     00ffh              _control_delay
      0180h              _KEY_STATUS
-     01bch              _set_tempture_max_value
-     01bdh              _set_tempture_value
-     01beh              _get_new_minute_range
-     01bfh              _get_new_hour_range
-     01c0h              _seg_week
-     01c1h              _seg_minute
-     01c2h              _seg_second
-     01c3h              _seg_hour
-     01c4h              _stm_count
-     01c6h              _stm_flag
-     01c8h              _ctm0_count
-     01cah              _get_time
-     01d1h              _display_numer
-     01e3h              _set_week_schedule_flag
-     01e4h              _ADCcount
-     01e5h              _index1
-     01e6h              _ADC_VALUE
-     01e8h              _delay_num
-     01eah              _adjust_time_intercal_index
-     01ebh              _adjust_week_index
-     01ech              _m
+     01bch              _int0_count
+     01bdh              _current_tempture
+     01beh              _stop_tempture
+     01bfh              _start_tempture
+     01c0h              _set_tempture_max_value
+     01c1h              _set_tempture_value
+     01c2h              _get_new_minute_range
+     01c3h              _get_new_hour_range
+     01c4h              _seg_week
+     01c5h              _seg_minute
+     01c6h              _seg_second
+     01c7h              _seg_hour
+     01c8h              _stm_count
+     01cah              _stm_flag
+     01cch              _ctm0_count
+     01ceh              _get_time
+     01d5h              _display_numer
+     01e7h              _set_week_schedule_flag
+     01e8h              _ADCcount
+     01e9h              _index1
+     01eah              _ADC_VALUE
+     01ech              _delay_num
+     01eeh              _adjust_time_intercal_index
+     01efh              _adjust_week_index
+     01f0h              _m
      02d0h              _filter_buf
      02f8h              r304
      02f9h              r404
@@ -559,96 +562,96 @@ Input Library File: C:\Program Files\Holtek MCU Development Tools\HT-IDE3000V7.x
      00b6h[4]           _key_confirm_flag
      00b6h[5]           _key_lock_flag
      00b6h[6]           _start_system
-     0619h              _LOAD_TKS_GLOBE_VARIES
      0619h              _LOAD_HXT_REFERENCE
-     06e5h              _TimeValueCount
-     0720h              _table
-     0726h              _Ad_Value_table
-     0726h              _temptab
-     078bh              _delay_ms
-     079bh              _display_position_led
-     0873h              _display_decimal
-     0905h              _led_light_level
-     0912h              _display_off_all_led
-     0926h              _display_num
-     0b09h              _display_RTC_time
-     0b3ch              _display_set_tempture
-     0b5fh              _display_get_NTC_tempture
-     0b82h              _set_seg_led_off
-     0cb1h              _init_TM1638
-     0cc2h              _ctm_init
-     0cceh              _stm_init
-     0cf7h              _UART_SendChar
-     0d00h              _SendString
-     0d0fh              _UART_Init
-     0d1eh              _key_model_select
-     0d5dh              _display_update
-     0d73h              _lvd_init
-     0d78h              _system_clock_init
-     0d7eh              _set_display_time
-     0da5h              _set_temp_add
-     0e0ch              _set_temp_sub
-     0e83h              _week_schudule_init
-     0f1ch              _write_eeprom_schedule
-     0f7ch              _read_eeprom_schedule
-     0fdeh              _select_model_
-     105ch              _USER_PROGRAM_INITIAL
-     10fah              _USER_PROGRAM
-     17dfh              _INT0
-     185ah              _ctm0
-     18aah              _stm0
-     191fh              _ntcinit
-     1927h              _getad
-     193eh              _get_adc_value
-     19b3h              _GetAdToTempature
-     1a35h              _GetTemp
-     1a6ch              _Data_ToBCD
-     1a84h              _Write_Ds1302_Byte
-     1a9bh              _Write_Ds1302
-     1aadh              _ds1302_readbyte
-     1ac7h              _Read_Ds1302
-     1aebh              _Read_RTC
-     1b08h              _Set_RTC
-     1b4dh              _init_ds1302
-     1b71h              _TM1638_Write
-     1b86h              _Write_COM
-     1b8eh              _Write_DATA
-     1b9dh              _EEPROM_ByteWrite
-     1bb0h              _EEPROM_ByteRead
-     1bc1h              __DELAYX6
-     1bc1h              __DELAYX5
-     1bc2h              __DELAYX4
-     1bc2h              __DELAYX3
-     1bc3h              __DELAYX2
-     1bc3h              __DELAYX1
-     1bc4h              __DELAYX0
-     1bcbh              __DELAYY5_isr00
-     1bcbh              __DELAYY4_isr00
-     1bcch              __DELAYY3_isr00
-     1bcch              __DELAYY2_isr00
-     1bcdh              __DELAYY1_isr00
-     1bcdh              __DELAYY0_isr00
-     1bd9h              _builtin_holtek_divmodqi4_isr00
-     1bdfh              _builtin_holtek_udivmodqi4_isr00
-     1bfeh              _builtin_holtek_divmodhi4_isr00
-     1c07h              _builtin_holtek_udivmodhi4_isr00
-     1c35h              _Crom2PromNext
-     1c36h              _Crom2Prom
+     0619h              _LOAD_TKS_GLOBE_VARIES
+     06e7h              _TimeValueCount
+     0722h              _table
+     0728h              _Ad_Value_table
+     0728h              _temptab
+     078dh              _delay_ms
+     079dh              _display_position_led
+     0875h              _display_decimal
+     0907h              _led_light_level
+     0914h              _display_off_all_led
+     0928h              _display_num
+     0b0bh              _display_RTC_time
+     0b3eh              _display_set_tempture
+     0b61h              _display_get_NTC_tempture
+     0b84h              _set_seg_led_off
+     0cb3h              _init_TM1638
+     0cc4h              _ctm_init
+     0cd0h              _stm_init
+     0cf9h              _UART_SendChar
+     0d02h              _SendString
+     0d11h              _UART_Init
+     0d20h              _key_model_select
+     0d5fh              _display_update
+     0d75h              _lvd_init
+     0d7ah              _system_clock_init
+     0d80h              _set_display_time
+     0da7h              _set_temp_add
+     0e0eh              _set_temp_sub
+     0e85h              _week_schudule_init
+     0f1eh              _write_eeprom_schedule
+     0f7eh              _read_eeprom_schedule
+     0fe0h              _select_model_
+     105eh              _USER_PROGRAM_INITIAL
+     112bh              _USER_PROGRAM
+     1814h              _INT0
+     1896h              _ctm0
+     18e6h              _stm0
+     195bh              _ntcinit
+     1963h              _getad
+     197ah              _get_adc_value
+     19efh              _GetAdToTempature
+     1a71h              _GetTemp
+     1aa8h              _Data_ToBCD
+     1ac0h              _Write_Ds1302_Byte
+     1ad7h              _Write_Ds1302
+     1ae9h              _ds1302_readbyte
+     1b03h              _Read_Ds1302
+     1b27h              _Read_RTC
+     1b44h              _Set_RTC
+     1b89h              _init_ds1302
+     1badh              _TM1638_Write
+     1bc2h              _Write_COM
+     1bcah              _Write_DATA
+     1bd9h              _EEPROM_ByteWrite
+     1bech              _EEPROM_ByteRead
+     1bfdh              __DELAYX5
+     1bfdh              __DELAYX6
+     1bfeh              __DELAYX3
+     1bfeh              __DELAYX4
+     1bffh              __DELAYX1
+     1bffh              __DELAYX2
+     1c00h              __DELAYX0
+     1c07h              __DELAYY4_isr00
+     1c07h              __DELAYY5_isr00
+     1c08h              __DELAYY2_isr00
+     1c08h              __DELAYY3_isr00
+     1c09h              __DELAYY0_isr00
+     1c09h              __DELAYY1_isr00
+     1c15h              _builtin_holtek_divmodqi4_isr00
+     1c1bh              _builtin_holtek_udivmodqi4_isr00
+     1c3ah              _builtin_holtek_divmodhi4_isr00
+     1c43h              _builtin_holtek_udivmodhi4_isr00
+     1c71h              _Crom2PromNext
+     1c72h              _Crom2Prom
 
 
 ROM Usage Statistics
      Size      Used     Percentage
-     2000h     1c43h    88%
+     2000h     1c7fh    89%
 
 RAM Usage Statistics
     Bank      Size      Used     Percentage
      00h       0080h     0080h    100%
-     01h       0080h     006dh    85%
+     01h       0080h     0071h    88%
      02h       0080h     0080h    100%
      03h       0080h     0061h    75%
      04h       0080h     0070h    87%
      05h       0080h     0000h    0%
-     Total     0300h     023eh    74%
+     Total     0300h     0242h    75%
 
 Use Stack Count
 _delay_50us: 1
