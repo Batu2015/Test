@@ -105,6 +105,7 @@ volatile unsigned char current_tempture = 20;
 //模式选择
 volatile bit hengwen_flag = 0;
 volatile bit zhineng_flag = 0;
+unsigned char set_hengwen_key_flag = 0;//判断加减按键是否按下
 
 volatile char int0_count = 100;//外部中断计数器
 volatile char control_delay = 2;//修改电压变化的时间间隔 默认5S
@@ -797,7 +798,7 @@ void system_clock_init()
 }
 
 /*
-	某一位数码管显示
+	设置某一组数码管熄灭
 */
 void set_display_time()
 {
@@ -1209,7 +1210,7 @@ void USER_PROGRAM()
 	unsigned int temp_value;
 	uchar i;
 	GCC_CLRWDT();	
-	GET_KEY_BITMAP();	
+	GET_KEY_BITMAP();//按键扫描	
 			
 			
 			/*检测是否有按键按下*/
@@ -1222,7 +1223,6 @@ void USER_PROGRAM()
 			{
 				B_2ms = 0;	
 								
-				
 				if((DATA_BUF[1] & 0x10) == 0x10)//key13 第一个按键 确认按键 返回 熄灭
 				{			
 					key_confirm_flag = 1;
@@ -1234,8 +1234,7 @@ void USER_PROGRAM()
 		    		{
 		    			startup_key_hold_ms = 0;
 		    			short_startup_key_flag = 0;
-		    			long_startup_key_flag ++;
-		    			
+		    			long_startup_key_flag ++;	
 		    		}
 		    		else if(startup_key_hold_ms > 10 && startup_key_hold_ms < 2000 )//时间大于50小于100表示短触摸
 		    		{
@@ -1265,7 +1264,14 @@ void USER_PROGRAM()
 							write_eeprom_schedule();//写入eeprom
 							return;	
 						}	
-							
+						
+						if(hengwen_flag == 1 && set_hengwen_key_flag == 1)
+						{
+							set_hengwen_key_flag = 0;
+							EEPROM_ByteWrite(0x7f,set_tempture_value);
+							return;		
+						}	
+						
 						if(key_lock_flag == 1)
 						{
 							key_lock_flag = 0;	
@@ -1345,7 +1351,7 @@ void USER_PROGRAM()
 		    		
 				if(long_startup_key_flag == 0  && start_system == 0)
 				{
-					//设置时间
+					//设置时间 第五个按键
 					if((DATA_BUF[2] & 0x01) == 0x01 && confirm_lock_key_flag !=1)//触摸一直按下key_hold_ms自加，用来判断长短按键,设置按键，第五个按键
 			    	{
 			    		key_hold_ms++;
@@ -1502,52 +1508,10 @@ void USER_PROGRAM()
 			    //	_tb1on  = 0;
 			    //	SCR_CONTROL = 1;//关闭可控硅
 			    //	delay_num = 10;
-			    }
-		    		
+			    }		
 			}
-		
-		if(key_lock_flag == 1 || set_week_schedule_flag != 0)
-		{
-			
-			if(ctm_500ms_flag == 1 ) //500ms闪烁一次 //长按标志位置位后就不关闭led
-			{
-				set_display_time();			
-			}
-			else 
-			{
-				display_RTC_time();
-				display_set_tempture(set_tempture_value);
-					
-			}
-			
-		}
 
-	  
-	  	if(ctm_500ms_flag == 1 && key_lock_flag != 1 && start_system == 0 && set_week_schedule_flag == 0)//RTC时间1s显示一次
-	  	{
-	  		ctm_500ms_flag =0;
-	  		Read_RTC(get_time);	 //读取DS1302当前时间
-	  		
-	  		seg_week = (get_time[5]>>4)*10+(get_time[5]&0x0f);
-	  		seg_hour = (get_time[2]>>4)*10+(get_time[2]&0x0f);
-	  		seg_minute = (get_time[1]>>4)*10+(get_time[1]&0x0f);
-	  				
-	  		new_sec = (get_time[0]>>4)*10 +(get_time[0]&0x0f);//秒闪烁功能
-	  		
-	  		if((new_sec - last_sec) == 1)
-	  		{
-	  			display_decimal(3,1);
-	  		}
-	  		else
-	  		{
-	  			last_sec = new_sec;	
-	  			display_decimal(3,0);	
-	  		}	
-	  	
-	  		display_RTC_time();
-	  		display_set_tempture(set_tempture_value);
-	  		
-	  	}
+
 
 	    if(int0_flag == 1 && key_lock_flag != 1 && confirm_lock_key_flag != 1 && start_system == 0 && set_week_schedule_flag == 0)
 	    {
@@ -1568,8 +1532,7 @@ void USER_PROGRAM()
 			start_tempture = set_tempture_value -2;
 			stop_tempture = set_tempture_value + 1;
 			
-			display_get_NTC_tempture(current_tempture);
-		  	
+			display_get_NTC_tempture(current_tempture);	
 	    }
 						
 		if( long_startup_key_flag == 0 && start_system == 0 && set_week_schedule_flag == 0 && key_lock_flag != 1 )//没有锁定下
@@ -1592,65 +1555,60 @@ void USER_PROGRAM()
 					key_model_select(model_index);
 					select_model_();	
 				}
-				
 			}
 		}
 		
-		if(long_startup_key_flag == 0 && start_system == 0 && model_index != 5 && confirm_lock_key_flag != 1) //没有锁定下 自加减一
+		if( long_startup_key_flag == 0 && start_system == 0 && model_index != 5 && confirm_lock_key_flag != 1 ) //没有锁定下 自加减一
 		{
 
-				if((DATA_BUF[1] & 0x40) == 0x40)
-				{
+			if((DATA_BUF[1] & 0x40) == 0x40)//加一按键判断
+			{
+				up_key_hold_ms++;
 					
-					up_key_hold_ms++;
-						
-		    		if(up_key_hold_ms > 10 && up_key_hold_ms < 3000 )//时间大于50小于100表示短触摸
-		    		{	
-		    			
-		    			up_key_hold_ms = 0;
-		    			if(hengwen_flag == 1){
-		    				set_temp_add();	
-		    		
-		    			}
-		    			else 
-		    			{
-		    				set_temp_add();	
-		    							
-		    			}
+	    		if(up_key_hold_ms > 10 && up_key_hold_ms < 3000 )//时间大于50小于100表示短触摸
+	    		{	
+	    			up_key_hold_ms = 0;
+	    			if(hengwen_flag == 1)
+	    			{
+						set_hengwen_key_flag = 0;
+	    				set_temp_add();	
+	    			}
+	    			else 
+	    			{
+	    				set_temp_add();					
+	    			}
+				
+					key_add_flag = 1;
+					check_long_key_flag = 1;//判断设置周模式时，长按标志位			
+	    		}		
+			}
+			else if (key_add_flag == 1 || (up_key_hold_ms >= 1 && up_key_hold_ms <=10))
+			{
+				if(hengwen_flag == 1) 
+				{
+					//按键弹起后，数码管开始闪烁显示
+					set_hengwen_key_flag = 1;
 					
-						key_add_flag = 1;
-						check_long_key_flag = 1;//判断设置周模式时，长按标志位	
-							
-		    		}
-		    				
-				}
-				else if (key_add_flag == 1 || (up_key_hold_ms >= 1 && up_key_hold_ms <=10))
-				{
-						if(hengwen_flag == 1){
-		    			
-		    				EEPROM_ByteWrite(0x7f,set_tempture_value);	
-		    			}
-	
-				
-	    				key_add_flag = 0;
-	    				up_key_hold_ms = 0;	
-	    				check_long_key_flag = 0;
-	    				
-				}
-			
-			
-				if((DATA_BUF[1] & 0x80) == 0x80)//key16 down 第四个按键 自减一
-				{
-				
+    			//	EEPROM_ByteWrite(0x7f,set_tempture_value);	
+    			}
+
+				key_add_flag = 0;
+				up_key_hold_ms = 0;	
+				check_long_key_flag = 0;		
+			}
+		
+			if((DATA_BUF[1] & 0x80) == 0x80)//key16 down 第四个按键 自减一
+			{
 				down_key_hold_ms++;	
 				
 				if(down_key_hold_ms > 15 && down_key_hold_ms < 4000 )//时间大于50小于100表示短触摸
 				{
 					down_key_hold_ms = 0;
 				
-					if(hengwen_flag == 1){
-					 set_temp_sub();
-						
+					if(hengwen_flag == 1)
+					{
+						set_hengwen_key_flag = 0;
+						set_temp_sub();	
 					}
 					else //if(set_week_schedule_flag != 0)
 					{
@@ -1658,38 +1616,34 @@ void USER_PROGRAM()
 					}
 					key_sub_flag = 1;
 					check_long_key_flag = 1;					    			
-				}	
-					
-				}	
-				else if(key_sub_flag == 1  || (down_key_hold_ms>= 1 && down_key_hold_ms<=15))
-				{
-					
-					if(hengwen_flag == 1){
-					
-					 EEPROM_ByteWrite(0x7f,set_tempture_value);		
-					}
+				}		
+			}	
+			else if(key_sub_flag == 1  || (down_key_hold_ms>= 1 && down_key_hold_ms<=15))
+			{
 				
-					key_sub_flag = 0;
-					down_key_hold_ms = 0;
-					check_long_key_flag = 0;	
-				}	  
+				if(hengwen_flag == 1){//按键弹起后，数码管开始闪烁显示
+				set_hengwen_key_flag = 1;
+				 //EEPROM_ByteWrite(0x7f,set_tempture_value);		
+				}
+			
+				key_sub_flag = 0;
+				down_key_hold_ms = 0;
+				check_long_key_flag = 0;	
+			}	  
 		}
-				
+			
+		/*
+		项目序号   说明
+		 1 -------》 可设置的最高温度
+		 2 -------》 温度校准 Temperature Calibration ，用于校正测量温度，范围是测量值+、-9.0℃，步进0.5℃
+		 3 -------》 温控容差 
+		 4 -------》 连续加热器保护触发时间 0-99小时，默认关闭==0
+		 5 
+		 6 -------》 恢复出厂
+			
+		*/		
 		if(short_startup_key_flag != 1 && start_system == 1 && key_confirm_flag != 1)//后台管理功能
 		{
-		
-			/*
-			项目序号   说明
-			 1 -------》 可设置的最高温度
-			 2 -------》 温度校准 Temperature Calibration ，用于校正测量温度，范围是测量值+、-9.0℃，步进0.5℃
-			 3 -------》 温控容差 
-			 4 -------》 连续加热器保护触发时间 0-99小时，默认关闭==0
-			 5 
-			 6 -------》 恢复出厂
-				
-			*/
-			//刷新led显示
-
 		
 			if(((DATA_BUF[1] & 0x40) == 0x40) && ((DATA_BUF[1] & 0x20) == 0x20) && ((DATA_BUF[2] & 0x01) == 0x01))//2 3 5三个按键
 			{
@@ -1697,103 +1651,92 @@ void USER_PROGRAM()
 			}
 			
 			if(set_backstage_flag == 1)
-			{			
-	
-						
-				//if(set_backstage_flag == 1)
+			{					
+				
+								
+				if((DATA_BUF[2] & 0x01) == 0x01)//切换下一个后台管理项目，设置温度栏显示序号
 				{
-					
-					//set_backstage_flag = 0;
-					
-					if((DATA_BUF[2] & 0x01) == 0x01)//切换下一个管理项目，设置温度栏显示序号
-					{
-						set_display_num_flag = 1;		
-					}
-					else 
-					{
-						if(set_display_num_flag == 1)
-						{
-							set_display_num_flag = 0;
-							set_Serial_number++;
-							if(set_Serial_number >4)set_Serial_number=0;
-						//	display_set_tempture(set_Serial_number);				
-						}	
-					}
-					
-					if((DATA_BUF[1] & 0x40) == 0x40)//加
-					{
-						backstage_add_flag = 1;
-						SendString("11111111");
-					}
-					else
-					{
-						if(backstage_add_flag == 1)
-						{
-							backstage_add_flag = 0;
-							
-							SendString("test add flag: ");
-							UART_SendChar(0x30);
-							SendString("\r\n");
-						
-							switch(set_Serial_number)
-							{
-								case 1:{
-									
-									set_tempture_max_value++;
-									if(set_tempture_max_value > 85)set_tempture_max_value = 85;	
-									EEPROM_ByteWrite(0x7e,set_tempture_max_value);	//0x7e 地址存储 后台 可设置的最大值
-									
-									SendString("test add flag: ");
-									UART_SendChar(set_tempture_max_value);
-									SendString("\r\n");
-								
-									break;			
-							    }
-								case 2:{
-									
-									break;	
-								}
-								case 3:{
-									
-									break;			
-							    }
-								case 4:{
-									
-									break;	
-								}					
-							}
-							
-						}	
-					}
-					
-					
-					if((DATA_BUF[1] & 0x80) == 0x80)//自减
-					{
-						backstage_sub_flag = 1;
-						SendString("2222");
-					}
-					else
-					{
-						if(backstage_sub_flag == 1)
-						{
-							backstage_sub_flag = 0;
-							SendString("33333");
-							set_tempture_max_value--;
-							if(set_tempture_max_value <5)set_tempture_max_value = 5;
-							EEPROM_ByteWrite(0x7e,set_tempture_max_value);	//0x7e 地址存储 后台 可设置的最大值
-							//display_get_NTC_tempture(set_tempture_max_value);
-						//	display_update();	
-								
-						}
-					}	
-				       		
+					set_display_num_flag = 1;		
 				}
+				else 
+				{
+					if(set_display_num_flag == 1)
+					{
+						set_display_num_flag = 0;
+						set_Serial_number++;
+						if(set_Serial_number >4)set_Serial_number=0;		
+					}	
+				}
+				
+				if((DATA_BUF[1] & 0x40) == 0x40)//加
+				{
+					backstage_add_flag = 1;
+					//SendString("11111111");
+				}
+				else
+				{
+					if(backstage_add_flag == 1)
+					{
+						backstage_add_flag = 0;
+						
+					//	SendString("test add flag: ");
+					//	UART_SendChar(0x30);
+					//	SendString("\r\n");
+					
+						switch(set_Serial_number)
+						{
+							case 1:{
+								
+								set_tempture_max_value++;
+								if(set_tempture_max_value > 85)set_tempture_max_value = 85;	
+								EEPROM_ByteWrite(0x7e,set_tempture_max_value);	//0x7e 地址存储 后台 可设置的最大值
+								
+								//SendString("test add flag: ");
+								//UART_SendChar(set_tempture_max_value);
+								//SendString("\r\n");
+							
+								break;			
+						    }
+							case 2:{
+								
+								break;	
+							}
+							case 3:{
+								
+								break;			
+						    }
+							case 4:{
+								
+								break;	
+							}					
+						}
+						
+					}	
+				}
+				
+				
+				if((DATA_BUF[1] & 0x80) == 0x80)//自减
+				{
+					backstage_sub_flag = 1;
+					//SendString("2222");
+				}
+				else
+				{
+					if(backstage_sub_flag == 1)
+					{
+						backstage_sub_flag = 0;
+						//SendString("33333");
+						set_tempture_max_value--;
+						if(set_tempture_max_value <5)set_tempture_max_value = 5;
+						EEPROM_ByteWrite(0x7e,set_tempture_max_value);	//0x7e 地址存储 后台 可设置的最大值
+							
+					}
+				}	
 				
 				display_set_tempture(set_Serial_number);	//显示后台管理功能项目序号
 				switch(set_Serial_number)
 				{
 					case 1:{
-						
 						display_get_NTC_tempture(set_tempture_max_value);
 						break;			
 				    }
@@ -1810,17 +1753,58 @@ void USER_PROGRAM()
 						break;	
 					}				
 				}		
-				display_update();
-						
-			}
-				
+				display_update();			
+			}		
 		}
 	
-
+			
+		//500ms闪烁一次 //长按标志位置位后就不关闭led
+		if(key_lock_flag == 1 || set_week_schedule_flag != 0 || set_hengwen_key_flag == 1)
+		{
+			if(ctm_500ms_flag == 1) 
+			{
+				set_display_time();			
+			}
+			else 
+			{
+				display_RTC_time();
+				display_set_tempture(set_tempture_value);		
+			}	
+		}
+		
+	    //RTC时间1s显示一次
+	  	if(ctm_500ms_flag == 1 && key_lock_flag != 1 && start_system == 0 && set_week_schedule_flag == 0 && set_hengwen_key_flag == 0)
+	  	{
+	  		ctm_500ms_flag =0;
+	  		Read_RTC(get_time);	 //读取DS1302当前时间
+	  		
+	  		seg_week = (get_time[5]>>4)*10+(get_time[5]&0x0f);
+	  		seg_hour = (get_time[2]>>4)*10+(get_time[2]&0x0f);
+	  		seg_minute = (get_time[1]>>4)*10+(get_time[1]&0x0f);
+	  				
+	  		new_sec = (get_time[0]>>4)*10 +(get_time[0]&0x0f);//秒闪烁功能
+	  		
+	  		if((new_sec - last_sec) == 1)
+	  		{
+	  			display_decimal(3,1);
+	  		}
+	  		else
+	  		{
+	  			last_sec = new_sec;	
+	  			display_decimal(3,0);	
+	  		}	
+	  	
+	  		display_RTC_time();
+	  		display_set_tempture(set_tempture_value);	
+	  	}
+	  	
 		if(confirm_lock_key_flag != 1 && start_system == 0)//刷新led显示
 		{
-			if(hengwen_flag == 1){
-				display_set_tempture(set_tempture_value);	
+			if(hengwen_flag == 1)
+			{
+				if(set_hengwen_key_flag == 0){
+					display_set_tempture(set_tempture_value);	
+				}
 			}
 			
 			display_update();
@@ -1854,7 +1838,6 @@ DEFINE_ISR (INT0, 0x04)
 			delay_num++;
 			
 			//delay_num=delay_num+50;
-			
 			if(delay_num >= 59)
 			{
 				display_decimal(8,1);
@@ -1947,7 +1930,8 @@ DEFINE_ISR(stm0,0x18)
 				stm_flag = 1;	
 			}			
 		}
-		else {
+		else 
+		{
 			if(stm_count>=500 )//1S
 			{	
 				stm_count = 0;
