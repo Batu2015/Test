@@ -904,11 +904,6 @@ void set_temp_add()
 					
 			break;	
 		}
-		case 6:
-		{
-			
-			break;	
-		}
 	}	
 }
 
@@ -1070,7 +1065,7 @@ void select_model_()
 			case 3:{//智能
 				zhineng_flag = 1;
 				hengwen_flag = 0;
-				
+				set_hengwen_key_flag = 0;
 				//break;
 			}
 			case 4:{//智能峰谷
@@ -1152,7 +1147,7 @@ void USER_PROGRAM_INITIAL()
    
  	init_ds1302();//DS1302实时时钟初始化
  	init_TM1638();//TM1638初始化
- 	led_light_level(1);//led灯初始亮度
+ 	led_light_level(7);//led灯初始亮度
  	
     ntcinit();//热敏电阻初始化
     UART_Init();//串口初始化
@@ -1167,10 +1162,11 @@ void USER_PROGRAM_INITIAL()
    	for(i = 1;i<=10;i++)
 	{
 		 display_num(i,8); 
-		 display_decimal(i,1);	 	
+		 display_decimal(i,1);	
+		 display_update(); 	
 	}
       
-    display_update();
+    //display_update();
      
     delay_ms(500);
     display_off_all_led();
@@ -1184,7 +1180,7 @@ void USER_PROGRAM_INITIAL()
 	{
 		week_schudule_init();
 		write_eeprom_schedule();
-		delay_ms(100);			
+		delay_ms(500);			
 	}
 		
 
@@ -1264,7 +1260,6 @@ void USER_PROGRAM()
 			{
 				system_password_lock_flag = 1;	
 				test_hold_ms = 0;	
-				
 			}	
 		}
 		else
@@ -1355,109 +1350,115 @@ void USER_PROGRAM()
 			{			
 				key_confirm_flag = 1;
 				startup_key_hold_ms++;
+					
 			}	
 			else
 			{
-				if(startup_key_hold_ms >= 2000)//长触摸5S锁定
+				if(startup_key_hold_ms >= 1000)//长触摸5S锁定
 	    		{
 	    			startup_key_hold_ms = 0;
 	    			short_startup_key_flag = 0;
-	    			long_startup_key_flag ++;	
+	    			long_startup_key_flag ++;
+	    		
 	    		}
-	    		else if(startup_key_hold_ms > 10 && startup_key_hold_ms < 2000 )//时间大于50小于100表示短触摸
+	    		else if(startup_key_hold_ms > 10 && startup_key_hold_ms < 1000 )//时间大于50小于100表示短触摸
 	    		{
 	    			startup_key_hold_ms = 0;
 	    			short_startup_key_flag = 1;	
-	    		}
 	    		
-	    		if(long_startup_key_flag == 1)//锁定键
-	    		{
-	    			display_decimal(9,1);	
-	    				
 	    		}
-	    		else if(long_startup_key_flag == 2){//应该验证密码是否正确
-	    			
-	    			display_decimal(9,0);	
-	    			long_startup_key_flag = 0;
-	    		}
-	    	
-	    		if(key_confirm_flag == 1 && short_startup_key_flag == 1 && long_startup_key_flag == 0 && start_system == 0 )//确认按键
+			}
+			
+    		if(long_startup_key_flag == 1)//锁定键
+    		{
+    			display_decimal(9,1);	
+    				
+    		}
+    		else if(long_startup_key_flag == 2)
+    		{//应该验证密码是否正确
+    				SendString("cd");	
+    			display_decimal(9,0);	
+    			long_startup_key_flag = 0;
+    		}
+    	
+    		if(key_confirm_flag == 1 && short_startup_key_flag == 1 && long_startup_key_flag == 0 && start_system == 0 )//确认按键
+			{
+			
+				key_confirm_flag = 0;
+				short_startup_key_flag = 0;
+			
+				if(zhineng_flag == 1 && set_week_schedule_flag != 0)
 				{
-					key_confirm_flag = 0;
-					short_startup_key_flag = 0;
+					
+					set_week_schedule_flag = 0;
+					write_eeprom_schedule();//写入eeprom
+					return;	
+				}	
 				
-					if(zhineng_flag == 1 && set_week_schedule_flag != 0)
-					{
-						
-						set_week_schedule_flag = 0;
-						write_eeprom_schedule();//写入eeprom
-						return;	
-					}	
+				if(hengwen_flag == 1 && set_hengwen_key_flag == 1)
+				{
+					set_hengwen_key_flag = 0;
+					EEPROM_ByteWrite(0x7f,set_tempture_value);
+					return;		
+				}	
+				
+				if(key_lock_flag == 1)
+				{
+					key_lock_flag = 0;	
+					get_time[5] = Data_ToBCD(seg_week);
+					get_time[2] = Data_ToBCD(seg_hour);
+					get_time[1] = Data_ToBCD(seg_minute);
 					
-					if(hengwen_flag == 1 && set_hengwen_key_flag == 1)
-					{
-						set_hengwen_key_flag = 0;
-						EEPROM_ByteWrite(0x7f,set_tempture_value);
-						return;		
-					}	
-					
-					if(key_lock_flag == 1)
-					{
-						key_lock_flag = 0;	
-						get_time[5] = Data_ToBCD(seg_week);
-						get_time[2] = Data_ToBCD(seg_hour);
-						get_time[1] = Data_ToBCD(seg_minute);
-						
-						Set_RTC(get_time);
-						display_RTC_time();	
-						select_model_();	
-					}
-					else if(model_lock_flag == 1)
-					{
-						model_lock_flag = 0;
-					}
-					else 
-					{
-					
-						if(confirm_lock_key_flag != 1 )//按下熄灭所有led 
-						{   
-							confirm_lock_key_flag = 1;
-							display_off_all_led();
-							
-							display_position_led(10,7,1);
-							display_update();
-							//锁定按键标志
-							confirm_lock_key_flag  = 1;	
-							
-							//By 19/2/24 关闭可控硅
-							//set_tempture_value = 5;
-							current_tempture = 80;
-							delay_num = 0;
-							SCR_CONTROL = 1;
-							_ston = 0;
-							start_system = 1;	//系统启动开机标志位
-							
-						}
-						else
-						{
-							display_position_led(10,7,0);
-							display_decimal(1,1);
-							display_decimal(4,1);
-							display_decimal(2,1);//摄氏度指示灯
-							
-							display_decimal(5,1);
-							display_decimal(7,1);
-							key_model_select(model_index);	
-						
-							confirm_lock_key_flag = 0;
-							
-							start_system = 0; //系统启动开机标志位
-										
-						}
-					}	
+					Set_RTC(get_time);
+					display_RTC_time();	
+					select_model_();	
 				}
+				else if(model_lock_flag == 1)
+				{
+					model_lock_flag = 0;
+				}
+				else 
+				{
 				
-			}	
+					if(confirm_lock_key_flag != 1 )//按下熄灭所有led 
+					{   
+						
+						display_off_all_led();
+						
+						display_position_led(10,7,1);
+						display_update();
+						//锁定按键标志
+						confirm_lock_key_flag = 1;	
+						
+						//By 19/2/24 关闭可控硅
+					
+						current_tempture = 80;
+						delay_num = 0;
+						SCR_CONTROL = 1;
+						_ston = 0;
+						start_system = 1;	//系统启动开机标志位
+						
+					}
+					else
+					{
+						display_position_led(10,7,0);
+						display_decimal(1,1);
+						display_decimal(4,1);
+						display_decimal(2,1);//摄氏度指示灯
+						
+						display_decimal(5,1);
+						display_decimal(7,1);
+						key_model_select(model_index);	
+					
+						confirm_lock_key_flag = 0;
+						
+						start_system = 0; //系统启动开机标志位
+									
+					}
+				}	
+			}
+				
+				
 			
 			//By 19/2/24
     		if(start_system == 1 && short_startup_key_flag == 1 && key_confirm_flag == 1)//上电后第一次按下，开机启动按键，
@@ -1465,6 +1466,8 @@ void USER_PROGRAM()
     			
     			short_startup_key_flag = 0;
     			key_confirm_flag = 0;
+    			
+    			confirm_lock_key_flag = 0;
     			
     			if(system_password_lock_flag == 1 )//设置密码
     			{
@@ -1493,17 +1496,17 @@ void USER_PROGRAM()
 				//设置时间 第五个按键
 				if((DATA_BUF[2] & 0x01) == 0x01 && confirm_lock_key_flag !=1)//触摸一直按下key_hold_ms自加，用来判断长短按键,设置按键，第五个按键
 		    	{
-		    		key_hold_ms++;
+		    		key_hold_ms++;		    		
 		    	}
 		    	else//触摸松开，用来判断长触摸还是短触摸大幅度发到付
 		    	{
-					if(key_hold_ms >= 150)//时间大于2000表示长触摸 并且led2开始闪烁
+					if(key_hold_ms >= 1000)//时间大于2000表示长触摸 并且led2开始闪烁
 		    		{
 		    			key_hold_ms = 0;
 		    			short_key_flag = 0;
 		    			long_key_flag = 1;
 		    		}
-		    		else if(key_hold_ms > 10 && key_hold_ms < 150 )//时间大于50小于100表示短触摸
+		    		else if(key_hold_ms > 10 && key_hold_ms < 1000 )//时间大于50小于100表示短触摸
 		    		{
 		    			key_hold_ms = 0;
 		    			short_key_flag = 1;
@@ -1524,7 +1527,6 @@ void USER_PROGRAM()
 			    		set_week_schedule_flag = 1; //设置周模式标志位
 			    		adjust_time_intercal_index = 1;
 			    		adjust_time_index = 1;//星期先设置
-			    		
 			    
 			    		seg_hour = 0;
 			    		seg_minute = 0;
@@ -1641,6 +1643,7 @@ void USER_PROGRAM()
 		    	short_key_flag = 0;
 		    	long_key_flag = 0;
 		    	adjust_time_index = 1;//设置时间星期索引，默认现在星期闪烁
+		    	
 		    	//关闭时基中断
 		    	//关闭温度采集
 		    	//500ms闪烁
@@ -1710,7 +1713,7 @@ void USER_PROGRAM()
 					set_hengwen_key_flag = 0;
     				set_temp_add();	
     			}
-    			else 
+    			else if(set_week_schedule_flag == 1 || key_lock_flag == 1)
     			{
     				set_temp_add();					
     			}
@@ -1747,7 +1750,7 @@ void USER_PROGRAM()
 					set_hengwen_key_flag = 0;
 					set_temp_sub();	
 				}
-				else //if(set_week_schedule_flag != 0)
+				else if(set_week_schedule_flag != 0 || key_lock_flag == 1)
 				{
 					set_temp_sub();			
 				}
@@ -1945,7 +1948,7 @@ void USER_PROGRAM()
 			}
 			
 			display_update();
-		}	  	
+	}	  	
 		
 }
 
