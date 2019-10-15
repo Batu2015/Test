@@ -61,13 +61,14 @@ unsigned char set_week_schedule_flag = 0;//周计划
 *************************************************************/
 bit start_system = 0;
 
-volatile bit key_lock_flag = 0;//按键长按功能启动后，暂时屏蔽掉长按功能
+volatile bit set_time_flag = 0;//按键长按功能启动后，暂时屏蔽掉长按功能
 bit key_confirm_flag = 0;//确认按键
 static volatile int contirm_delay = 10000;//20S后无操作，自动确认返回
 static volatile bit confirm_lock_key_flag = 0;//按下第一个按键，熄灭led后标志位
 
 //密码锁定 4位，十六进制
 char system_password_lock[4] = {0};
+char get_password_lock_code[4] = {0};
 //unsigned int system_password = 0x0000;// 默认密码为 0000
 unsigned char system_password_lock_flag = 0;
 
@@ -144,7 +145,7 @@ volatile unsigned int key_hold_ms = 0;
 
 
 volatile bit short_startup_key_flag = 0;//长按开机键标识
-volatile char long_startup_key_flag  = 0;//短按开机键标识
+volatile char long_key_startup_lock_flag  = 0;//短按开机键标识
 volatile unsigned int startup_key_hold_ms = 0;//保持时间
 volatile unsigned int down_key_hold_ms = 0;//保持时间
 volatile unsigned int up_key_hold_ms = 0;//保持时间
@@ -272,7 +273,6 @@ void display_decimal(int index,char enable_decimal)
 		case 2:	
 			temp2.bits.b0 = enable_decimal;
 			break;
-			
 		case 3:	
 			temp1.bits.b7 = enable_decimal;
 			break;
@@ -1130,7 +1130,7 @@ void USER_PROGRAM_INITIAL()
 	contirm_delay = 10000;//20S
 	ctm0_count = 500;
 	
-	key_lock_flag = 0;
+	set_time_flag = 0;
 	
 	 seg_week = 1;
 	 
@@ -1188,22 +1188,22 @@ void USER_PROGRAM_INITIAL()
 	if(EEPROM_ByteRead(0x7a) == 0xff || EEPROM_ByteRead(0x7b) == 0xff || EEPROM_ByteRead(0x7c) == 0xff || EEPROM_ByteRead(0x7d) == 0xff)
 	{
 			//上电后读取密码锁的值 0x00== 不锁定按键，否则需要输入密码
-		system_password_lock[0] = 0x00;//初始化默认是0x0000
-		system_password_lock[1] = 0x00;
-		system_password_lock[2] = 0x00;
-		system_password_lock[3] = 0x00;
-	
-		EEPROM_ByteWrite(0x7a,system_password_lock[0]);
-		EEPROM_ByteWrite(0x7b,system_password_lock[1]);
-		EEPROM_ByteWrite(0x7c,system_password_lock[2]);
-		EEPROM_ByteWrite(0x7d,system_password_lock[3]);
+	//初始化默认是0x0000
+
+		for(i = 0;i<4;i++)
+		{
+			EEPROM_ByteWrite((0x7a+i),0);
+			system_password_lock[i] = 0;
+			get_password_lock_code[i] = 0;		
+		}
 	}
 	else
 	{
-		system_password_lock[0] = EEPROM_ByteRead(0x7a);
-		system_password_lock[1] = EEPROM_ByteRead(0x7b);
-		system_password_lock[2] = EEPROM_ByteRead(0x7c);
-		system_password_lock[3] = EEPROM_ByteRead(0x7d);	
+		for(i=0;i<4;i++)
+		{
+			get_password_lock_code[i] = EEPROM_ByteRead((0x7a+i));
+			system_password_lock[i]   = get_password_lock_code[i];
+		}			
 	}
 	
 	
@@ -1224,6 +1224,7 @@ void USER_PROGRAM_INITIAL()
 }
 uint test_hold_ms  = 0;
 unsigned char system_password_lock_index = 0;
+uchar check_password_flag = 0;
 //==============================================
 //**********************************************
 //主程序
@@ -1242,6 +1243,23 @@ void USER_PROGRAM()
 	if(DATA_BUF[1] != 0x00 || DATA_BUF[2] != 0x00)
 	{
 		contirm_delay = 10000;//10秒
+		if(long_key_startup_lock_flag == 2 && system_password_lock_flag != 1)//锁定使能后
+		{
+			
+   			for(i = 0;i< 4;i++)
+			{
+				if(get_password_lock_code[i] != 0)//判断只要是存储的密码不等于0000就跳转到输入密码界面
+				{//密码错误 进入设置密码界面
+					
+					//check_password_flag = 1;
+					system_password_lock_flag = 1;
+					display_off_all_led();
+					display_decimal(9,1);
+					display_update();
+					return;			
+				}
+   			}	
+		}
 	}
 
 	
@@ -1271,14 +1289,14 @@ void USER_PROGRAM()
 		
 		if(system_password_lock_flag == 1)
 		{
-			if(ctm_500ms_flag == 1) 
+			
+			if (check_password_flag == 1)
 			{
-				set_seg_led_off(system_password_lock_index+2);
-						
-			}
-			else 
-			{
-				display_passwod_lock();			
+				check_password_flag = 2;
+				system_password_lock[0] = 0;
+				system_password_lock[1] = 0;
+				system_password_lock[2] = 0;
+				system_password_lock[3] = 0;	
 			}
 						
 			if((DATA_BUF[2] & 0x01) == 0x01 && (DATA_BUF[1] & 0x80) != 0x80)//判断是否只有最后一个按键按下
@@ -1337,6 +1355,14 @@ void USER_PROGRAM()
 				key_sub_flag = 0;
 			}
 			
+			if(ctm_500ms_flag == 1) 
+			{
+				set_seg_led_off(system_password_lock_index+2);		
+			}
+			else 
+			{
+				display_passwod_lock();			
+			}
 			
 			display_update();
 		}
@@ -1350,7 +1376,7 @@ void USER_PROGRAM()
 			{			
 				key_confirm_flag = 1;
 				startup_key_hold_ms++;
-					
+				
 			}	
 			else
 			{
@@ -1358,30 +1384,57 @@ void USER_PROGRAM()
 	    		{
 	    			startup_key_hold_ms = 0;
 	    			short_startup_key_flag = 0;
-	    			long_startup_key_flag ++;
+	    			long_key_startup_lock_flag ++;
 	    		
 	    		}
 	    		else if(startup_key_hold_ms > 10 && startup_key_hold_ms < 1000 )//时间大于50小于100表示短触摸
 	    		{
 	    			startup_key_hold_ms = 0;
 	    			short_startup_key_flag = 1;	
-	    		
 	    		}
 			}
 			
-    		if(long_startup_key_flag == 1)//锁定键
+    		if(long_key_startup_lock_flag == 1)//锁定键
     		{
+    			long_key_startup_lock_flag = 2;
+    			check_password_flag = 1;
     			display_decimal(9,1);	
-    				
+    					
     		}
-    		else if(long_startup_key_flag == 2)
+    		else if(long_key_startup_lock_flag > 2)
     		{//应该验证密码是否正确
-    				SendString("cd");	
+    			SendString("password_ok");
+    			
     			display_decimal(9,0);	
-    			long_startup_key_flag = 0;
+    			long_key_startup_lock_flag = 0;
     		}
     	
-    		if(key_confirm_flag == 1 && short_startup_key_flag == 1 && long_startup_key_flag == 0 && start_system == 0 )//确认按键
+    		if(check_password_flag == 2 && short_startup_key_flag == 1 )//验证比较密码
+    		{
+    			system_password_lock_flag = 0;
+    			
+    			short_startup_key_flag = 0;	
+    			
+    			for(i = 0;i<4;i++)
+    			{
+    				if(system_password_lock[i] == get_password_lock_code[i])
+    				{
+    					long_key_startup_lock_flag = 3;//密码 正确
+    					check_password_flag = 0;
+    					//SendString("password_ok");
+    				}
+    				else
+    				{
+    				    long_key_startup_lock_flag = 2;// 密码 错误
+    				    check_password_flag = 1;
+    				    SendString("password_err");
+    				    return;
+    				}	
+    			}
+    				
+    		}
+    		
+    		if(key_confirm_flag == 1 && short_startup_key_flag == 1 && long_key_startup_lock_flag == 0 && start_system == 0 )//确认按键
 			{
 			
 				key_confirm_flag = 0;
@@ -1402,9 +1455,9 @@ void USER_PROGRAM()
 					return;		
 				}	
 				
-				if(key_lock_flag == 1)
+				if(set_time_flag == 1)
 				{
-					key_lock_flag = 0;	
+					set_time_flag = 0;	
 					get_time[5] = Data_ToBCD(seg_week);
 					get_time[2] = Data_ToBCD(seg_hour);
 					get_time[1] = Data_ToBCD(seg_minute);
@@ -1452,32 +1505,39 @@ void USER_PROGRAM()
 					
 						confirm_lock_key_flag = 0;
 						
-						start_system = 0; //系统启动开机标志位
-									
+						start_system = 0; //系统启动开机标志位				
 					}
 				}	
 			}
 				
-				
-			
 			//By 19/2/24
     		if(start_system == 1 && short_startup_key_flag == 1 && key_confirm_flag == 1)//上电后第一次按下，开机启动按键，
     		{
-    			
     			short_startup_key_flag = 0;
     			key_confirm_flag = 0;
     			
     			confirm_lock_key_flag = 0;
     			
-    			if(system_password_lock_flag == 1 )//设置密码
+    			for(i = 0;i< 4;i++)
+				{
+					if(get_password_lock_code[i] != 0)//判断只要是存储的密码不等于0000就锁定led亮
+					{						
+						long_key_startup_lock_flag = 1;
+					}
+	   			}
+    			
+    			if(system_password_lock_flag == 1 )//设置存储密码
     			{
-    				EEPROM_ByteWrite(0x7a,system_password_lock[0]);
-					EEPROM_ByteWrite(0x7b,system_password_lock[1]);
-					EEPROM_ByteWrite(0x7c,system_password_lock[2]);
-					EEPROM_ByteWrite(0x7d,system_password_lock[3]);
-    				//return;
+    				for(i = 0;i<4;i++)
+					{
+						EEPROM_ByteWrite((0x7a+i),system_password_lock[i]);
+						get_password_lock_code[i] = system_password_lock[i];
+						delay_50us();		
+					}
+    			
     				system_password_lock_flag = 0;	
     			}
+    			
 				start_system = 0;
 				delay_num = 1;	
 				
@@ -1491,7 +1551,7 @@ void USER_PROGRAM()
 				
     		}	
 	    		
-			if(long_startup_key_flag == 0  && start_system == 0)
+			if(long_key_startup_lock_flag == 0  && start_system == 0)
 			{
 				//设置时间 第五个按键
 				if((DATA_BUF[2] & 0x01) == 0x01 && confirm_lock_key_flag !=1)//触摸一直按下key_hold_ms自加，用来判断长短按键,设置按键，第五个按键
@@ -1519,7 +1579,7 @@ void USER_PROGRAM()
 		    {
 		    	short_key_flag = 0;
 		    	long_key_flag = 0;
-		    	if(zhineng_flag == 1 && key_lock_flag == 0)//智能模式下，设置周模式
+		    	if(zhineng_flag == 1 && set_time_flag == 0)//智能模式下，设置周模式
 		    	{
 		    					    		
 		    		if(set_week_schedule_flag == 0)//智能模式，第一次按下，进入设置模式下 0点不可修改
@@ -1550,7 +1610,6 @@ void USER_PROGRAM()
 			    			
 			    		    set_tempture_value = set_week_schedule[seg_week][0].set_temp;
 			    		   
-			    		
 			    			if(adjust_time_intercal_index >4)
 				    		{
 				    			set_week_schedule[seg_week - 1][adjust_time_intercal_index-1].enable = 1;
@@ -1624,7 +1683,7 @@ void USER_PROGRAM()
 			    	}	
 		    	}
 		    
-		     	if(set_week_schedule_flag == 0 && key_lock_flag == 1)
+		     	if(set_week_schedule_flag == 0 && set_time_flag == 1)
 		    	{
 		    		display_decimal(7,0);
 		    	 	adjust_time_index++;//调整时间闪烁位置
@@ -1637,23 +1696,16 @@ void USER_PROGRAM()
 		    else if(long_key_flag == 1)
 		    {
 		    
-		    	key_lock_flag = 1;
+		    	set_time_flag = 1;
 		    	
 		    	display_decimal(7,1);
 		    	short_key_flag = 0;
 		    	long_key_flag = 0;
 		    	adjust_time_index = 1;//设置时间星期索引，默认现在星期闪烁
-		    	
-		    	//关闭时基中断
-		    	//关闭温度采集
-		    	//500ms闪烁
-		    //	_tb1on  = 0;
-		    //	SCR_CONTROL = 1;//关闭可控硅
-		    //	delay_num = 10;
 		    }		
-		}
+	}
 
-    if(int0_flag == 1 && key_lock_flag != 1 && confirm_lock_key_flag != 1 && start_system == 0 && set_week_schedule_flag == 0)
+    if(int0_flag == 1 && set_time_flag != 1 && confirm_lock_key_flag != 1 && start_system == 0 && set_week_schedule_flag == 0 && system_password_lock_flag != 1)
     {
     	int0_flag = 0;
 		current_tempture = GetTemp();//读取当前NTC电阻的实时温度
@@ -1675,7 +1727,7 @@ void USER_PROGRAM()
 		display_get_NTC_tempture(current_tempture);	
     }
 					
-	if( long_startup_key_flag == 0 && start_system == 0 && set_week_schedule_flag == 0 && key_lock_flag != 1 )//没有锁定下
+	if( long_key_startup_lock_flag == 0 && start_system == 0 && set_week_schedule_flag == 0 && set_time_flag != 1 )//没有锁定下
 	{
 		if((DATA_BUF[1] & 0x20) == 0x20 && confirm_lock_key_flag != 1)//key14 第二个按键 模式选择按键
 		{
@@ -1698,9 +1750,8 @@ void USER_PROGRAM()
 		}
 	}
 	
-	if( long_startup_key_flag == 0 && start_system == 0 && model_index != 5 && confirm_lock_key_flag != 1 ) //没有锁定下 自加减一
+	if( long_key_startup_lock_flag == 0 && start_system == 0 && model_index != 5 && confirm_lock_key_flag != 1 ) //没有锁定下 自加减一
 	{
-
 		if((DATA_BUF[1] & 0x40) == 0x40)//加一按键判断
 		{
 			up_key_hold_ms++;
@@ -1713,7 +1764,7 @@ void USER_PROGRAM()
 					set_hengwen_key_flag = 0;
     				set_temp_add();	
     			}
-    			else if(set_week_schedule_flag == 1 || key_lock_flag == 1)
+    			else if(set_week_schedule_flag == 1 || set_time_flag == 1)
     			{
     				set_temp_add();					
     			}
@@ -1727,9 +1778,7 @@ void USER_PROGRAM()
 			if(hengwen_flag == 1) 
 			{
 				//按键弹起后，数码管开始闪烁显示
-				set_hengwen_key_flag = 1;
-				
-			//	EEPROM_ByteWrite(0x7f,set_tempture_value);	
+				set_hengwen_key_flag = 1;	
 			}
 
 			key_add_flag = 0;
@@ -1750,7 +1799,7 @@ void USER_PROGRAM()
 					set_hengwen_key_flag = 0;
 					set_temp_sub();	
 				}
-				else if(set_week_schedule_flag != 0 || key_lock_flag == 1)
+				else if(set_week_schedule_flag != 0 || set_time_flag == 1)
 				{
 					set_temp_sub();			
 				}
@@ -1763,7 +1812,7 @@ void USER_PROGRAM()
 			
 			if(hengwen_flag == 1){//按键弹起后，数码管开始闪烁显示
 			set_hengwen_key_flag = 1;
-			 //EEPROM_ByteWrite(0x7f,set_tempture_value);		
+			 		
 			}
 		
 			key_sub_flag = 0;
@@ -1811,7 +1860,6 @@ void USER_PROGRAM()
 			if((DATA_BUF[1] & 0x40) == 0x40)//加
 			{
 				backstage_add_flag = 1;
-				//SendString("11111111");
 			}
 			else
 			{
@@ -1858,18 +1906,16 @@ void USER_PROGRAM()
 			if((DATA_BUF[1] & 0x80) == 0x80)//自减
 			{
 				backstage_sub_flag = 1;
-				//SendString("2222");
 			}
 			else
 			{
 				if(backstage_sub_flag == 1)
 				{
 					backstage_sub_flag = 0;
-					//SendString("33333");
+				
 					set_tempture_max_value--;
 					if(set_tempture_max_value <5)set_tempture_max_value = 5;
-					EEPROM_ByteWrite(0x7e,set_tempture_max_value);	//0x7e 地址存储 后台 可设置的最大值
-						
+					EEPROM_ByteWrite(0x7e,set_tempture_max_value);	//0x7e 地址存储 后台 可设置的最大值	
 				}
 			}	
 			
@@ -1899,7 +1945,7 @@ void USER_PROGRAM()
 
 		
 	//500ms闪烁一次 //长按标志位置位后就不关闭led
-	if(key_lock_flag == 1 || set_week_schedule_flag != 0 || set_hengwen_key_flag == 1)
+	if(set_time_flag == 1 || set_week_schedule_flag != 0 || set_hengwen_key_flag == 1 )
 	{
 		if(ctm_500ms_flag == 1) 
 		{
@@ -1913,7 +1959,7 @@ void USER_PROGRAM()
 	}
 	
     //RTC时间1s显示一次
-  	if(ctm_500ms_flag == 1 && key_lock_flag != 1 && start_system == 0 && set_week_schedule_flag == 0 && set_hengwen_key_flag == 0)
+  	if(ctm_500ms_flag == 1 && set_time_flag != 1 && start_system == 0 && set_week_schedule_flag == 0 && set_hengwen_key_flag == 0 && system_password_lock_flag != 1)
   	{
   		ctm_500ms_flag =0;
   		Read_RTC(get_time);	 //读取DS1302当前时间
@@ -1938,16 +1984,16 @@ void USER_PROGRAM()
   		display_set_tempture(set_tempture_value);	
   	}
   	
-	if(confirm_lock_key_flag != 1 && start_system == 0)//刷新led显示
+	if(confirm_lock_key_flag != 1 && start_system == 0 && system_password_lock_flag != 1)//刷新led显示
 	{
-			if(hengwen_flag == 1)
-			{
-				if(set_hengwen_key_flag == 0){
-					display_set_tempture(set_tempture_value);	
-				}
+		if(hengwen_flag == 1)
+		{
+			if(set_hengwen_key_flag == 0){
+				display_set_tempture(set_tempture_value);	
 			}
-			
-			display_update();
+		}
+		
+		display_update();
 	}	  	
 		
 }
@@ -1998,7 +2044,6 @@ DEFINE_ISR (INT0, 0x04)
 				_ston = 0;			
 			}	
 		}
-
 	}	
 }
 
@@ -2032,11 +2077,11 @@ DEFINE_ISR(ctm0,0x14)
 			}
 		}		
 		
-		if(key_lock_flag == 1 || set_week_schedule_flag == 1)
+		if(set_time_flag == 1 || set_week_schedule_flag == 1)
 		{
 			if(--contirm_delay < 0)//20S	
 			{
-				key_lock_flag = 0;
+				set_time_flag = 0;
 				contirm_delay = 10000;		
 			}	
 		}
