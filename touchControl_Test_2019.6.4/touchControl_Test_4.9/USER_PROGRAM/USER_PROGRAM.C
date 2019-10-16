@@ -1410,7 +1410,7 @@ void USER_PROGRAM()
     			long_key_startup_lock_flag = 0;
     		}
     	
-    		if(check_password_flag == 2 && short_startup_key_flag == 1 )//验证比较密码
+    		if(check_password_flag == 2 && short_startup_key_flag == 1 && start_system == 0)//验证比较密码
     		{
     			system_password_lock_flag = 0;
     			
@@ -1519,13 +1519,6 @@ void USER_PROGRAM()
     			
     			confirm_lock_key_flag = 0;
     			
-    			for(i = 0;i< 4;i++)
-				{
-					if(get_password_lock_code[i] != 0)//判断只要是存储的密码不等于0000就锁定led亮
-					{						
-						long_key_startup_lock_flag = 1;
-					}
-	   			}
     			
     			if(system_password_lock_flag == 1 )//设置存储密码
     			{
@@ -1533,12 +1526,27 @@ void USER_PROGRAM()
 					{
 						EEPROM_ByteWrite((0x7a+i),system_password_lock[i]);
 						get_password_lock_code[i] = system_password_lock[i];
-						delay_50us();		
+						delay_ms(5);	
 					}
-    			
-    				system_password_lock_flag = 0;	
+    				//	system_password_lock_flag = 0;	
     			}
     			
+    			for(i = 0;i< 4;i++)
+				{
+					if(get_password_lock_code[i] != 0)//判断只要是存储的密码不等于0000就锁定led亮
+					{	
+//						if(system_password_lock_flag == 1){
+//							long_key_startup_lock_flag = 0;		
+//						}					
+//						else
+//						{
+							long_key_startup_lock_flag = 1;	
+//						}
+						
+					}
+	   			}
+	   			system_password_lock_flag = 0;	
+	   			
 				start_system = 0;
 				delay_num = 1;	
 				
