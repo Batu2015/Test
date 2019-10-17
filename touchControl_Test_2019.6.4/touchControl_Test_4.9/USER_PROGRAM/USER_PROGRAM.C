@@ -63,14 +63,14 @@ bit start_system = 0;
 
 volatile bit set_time_flag = 0;//按键长按功能启动后，暂时屏蔽掉长按功能
 bit key_confirm_flag = 0;//确认按键
-static volatile int contirm_delay = 10000;//20S后无操作，自动确认返回
+static volatile int confirm_delay = 10000;//10S后无操作，自动确认返回
 static volatile bit confirm_lock_key_flag = 0;//按下第一个按键，熄灭led后标志位
 
 //密码锁定 4位，十六进制
 char system_password_lock[4] = {0};
 char get_password_lock_code[4] = {0};
 //unsigned int system_password = 0x0000;// 默认密码为 0000
-unsigned char system_password_lock_flag = 0;
+volatile unsigned char system_password_lock_flag = 0;
 
 
 volatile unsigned char display_numer[16]={0};
@@ -1127,7 +1127,7 @@ void USER_PROGRAM_INITIAL()
 	adjust_week_index = 0;
 	set_week_schedule_flag = 0;//初始化week模式
 					    		
-	contirm_delay = 10000;//20S
+	confirm_delay = 10000;//20S
 	ctm0_count = 500;
 	
 	set_time_flag = 0;
@@ -1188,7 +1188,7 @@ void USER_PROGRAM_INITIAL()
 	if(EEPROM_ByteRead(0x7a) == 0xff || EEPROM_ByteRead(0x7b) == 0xff || EEPROM_ByteRead(0x7c) == 0xff || EEPROM_ByteRead(0x7d) == 0xff)
 	{
 			//上电后读取密码锁的值 0x00== 不锁定按键，否则需要输入密码
-	//初始化默认是0x0000
+		//初始化默认是0x0000
 
 		for(i = 0;i<4;i++)
 		{
@@ -1242,7 +1242,11 @@ void USER_PROGRAM()
 	/*检测是否有按键按下*/
 	if(DATA_BUF[1] != 0x00 || DATA_BUF[2] != 0x00)
 	{
-		contirm_delay = 10000;//10秒
+		confirm_delay = 10000;//20秒
+//		if(set_time_flag == 1 || set_week_schedule_flag == 1){
+//			confirm_delay = 10000;//10s后无任何操作自动返回			
+//		}
+		
 		if(long_key_startup_lock_flag == 2 && system_password_lock_flag != 1)//锁定使能后
 		{
 			
@@ -1260,7 +1264,9 @@ void USER_PROGRAM()
 				}
    			}	
 		}
+		
 	}
+
 
 
 	
@@ -1549,6 +1555,8 @@ void USER_PROGRAM()
 	   			
 				start_system = 0;
 				delay_num = 1;	
+				
+				led_light_level(8);//开机亮度最高
 				
 				display_decimal(1,1);
 				display_decimal(4,1);
@@ -2086,14 +2094,44 @@ DEFINE_ISR(ctm0,0x14)
 			}
 		}		
 		
-		if(set_time_flag == 1 || set_week_schedule_flag == 1)
+		if(set_time_flag == 1 || set_week_schedule_flag == 1 || system_password_lock_flag == 1)
 		{
-			if(--contirm_delay < 0)//20S	
+			if(--confirm_delay < 0)//20S	
 			{
 				set_time_flag = 0;
-				contirm_delay = 10000;		
+				//set_week_schedule_flag = 0;
+				led_light_level(2);
+				
+				if(start_system == 1){//设置密码 默认不自动存储
+					short_startup_key_flag = 1;
+					key_confirm_flag = 1;
+					system_password_lock_flag = 0;
+						
+				}
+				else if( system_password_lock_flag == 1)//比较密码 
+				{
+					
+					system_password_lock_flag = 0;
+	    			short_startup_key_flag = 0;	
+	    			long_key_startup_lock_flag = 2;
+	    			check_password_flag = 1;
+				}
+				else {//RTC时间，和周模式
+				
+					key_confirm_flag = 1;
+					short_startup_key_flag = 1;
+					long_key_startup_lock_flag = 0;
+				//	start_system = 0 ;	
+				}
+				
+
+    			
+				//SendString("set_time_flag_0");
+				confirm_delay = 10000;		
 			}	
 		}
+		
+		
 	}
 }
 
