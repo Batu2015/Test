@@ -304,14 +304,17 @@ void display_decimal(int index,char enable_decimal)
 		display_numer[1] = temp2.data;	
 }
 
-//亮度调节
+//背光亮度调节
 /*
-	亮度等级：1-8数字越大led越亮
-	TM1638 Led亮度 (0x88-0x8f)8级亮度可调	
+	亮度等级：1-8数字越大led越亮0表示关闭
+	
+	TM1638 Led亮度 (0x88-0x8f)8级亮度可调
+	
+		
 */
-void led_light_level(char level)//
+void set_led_backlight_level(char level)//
 {
-	if(level > 0 && level < 9)
+	if(level >= 0 && level < 9)
 	{
 		Write_COM(0x87+level);	
 	}	
@@ -322,7 +325,7 @@ led全灭
 index:1-10
 
 **************************************/
-void display_off_all_led( )
+void display_all_data_clear( )
 {
 	char i;
 	for(i= 0;i<= 0x0f; i++)
@@ -602,19 +605,6 @@ void display_passwod_lock()
 	display_num(4,system_password_lock[2]);
 	display_num(5,system_password_lock[3]);	
 }
-//TM1638初始化函数
-void init_TM1638(void)
-{
-	unsigned char i;
-	Write_COM(0x88);       //亮度 (0x88-0x8f)8级亮度可调
-	Write_COM(0x40);       //采用地址自动加1
-	STB_L();	           //
-	TM1638_Write(0xc0);    //设置起始地址
-
-	for(i=0;i<16;i++)	   //传送16个字节的数据
-		TM1638_Write(0x00);
-	STB_H();
-}
 
 void ctm_init( void )//2ms
 {
@@ -779,7 +769,7 @@ void key_model_select(char index)
 //显示刷新函数
 void display_update()
 {
-	char i;
+	uchar i;
 	for(i = 0;i< 16;i++)
 	{
 		Write_DATA(i,display_numer[i]);//grd1 seg1-seg8	
@@ -1147,7 +1137,7 @@ void USER_PROGRAM_INITIAL()
    
  	init_ds1302();//DS1302实时时钟初始化
  	init_TM1638();//TM1638初始化
- 	led_light_level(7);//led灯初始亮度
+ 	set_led_backlight_level(7);//led灯初始亮度
  	
     ntcinit();//热敏电阻初始化
     UART_Init();//串口初始化
@@ -1169,7 +1159,8 @@ void USER_PROGRAM_INITIAL()
     //display_update();
      
     delay_ms(500);
-    display_off_all_led();
+    set_led_backlight_level(0);
+    display_all_data_clear();
     display_update();
     delay_ms(500);
     
@@ -1246,7 +1237,7 @@ void USER_PROGRAM()
 //		if(set_time_flag == 1 || set_week_schedule_flag == 1){
 //			confirm_delay = 10000;//10s后无任何操作自动返回			
 //		}
-		
+		set_led_backlight_level(8);
 		if(long_key_startup_lock_flag == 2 && system_password_lock_flag != 1)//锁定使能后
 		{
 			
@@ -1257,7 +1248,8 @@ void USER_PROGRAM()
 					
 					//check_password_flag = 1;
 					system_password_lock_flag = 1;
-					display_off_all_led();
+					set_led_backlight_level(0);
+					display_all_data_clear();
 					display_decimal(9,1);
 					display_update();
 					return;			
@@ -1266,9 +1258,6 @@ void USER_PROGRAM()
 		}
 		
 	}
-
-
-
 	
 	/*
 	//系统密码锁定 
@@ -1296,6 +1285,7 @@ void USER_PROGRAM()
 		
 		if(system_password_lock_flag == 1)
 		{
+			set_led_backlight_level(8);
 			
 			if (check_password_flag == 1)
 			{
@@ -1349,8 +1339,7 @@ void USER_PROGRAM()
 				if(down_key_hold_ms > 10 && down_key_hold_ms < 4000 )//时间大于50小于100表示短触摸
 				{
 					down_key_hold_ms = 0;
-				
-							
+						
 					system_password_lock[system_password_lock_index]--;
 	    			if(system_password_lock[system_password_lock_index] < 0)system_password_lock[system_password_lock_index] = 0x0f;	
 					key_sub_flag = 1;						    			
@@ -1419,7 +1408,6 @@ void USER_PROGRAM()
     		if(check_password_flag == 2 && short_startup_key_flag == 1 && start_system == 0)//验证比较密码
     		{
     			system_password_lock_flag = 0;
-    			
     			short_startup_key_flag = 0;	
     			
     			for(i = 0;i<4;i++)
@@ -1482,8 +1470,8 @@ void USER_PROGRAM()
 				
 					if(confirm_lock_key_flag != 1 )//按下熄灭所有led 
 					{   
-						
-						display_off_all_led();
+						set_led_backlight_level(0);
+						display_all_data_clear();
 						
 						display_position_led(10,7,1);
 						display_update();
@@ -1556,7 +1544,7 @@ void USER_PROGRAM()
 				start_system = 0;
 				delay_num = 1;	
 				
-				led_light_level(8);//开机亮度最高
+				set_led_backlight_level(8);//开机亮度最高
 				
 				display_decimal(1,1);
 				display_decimal(4,1);
@@ -1858,7 +1846,6 @@ void USER_PROGRAM()
 		
 		if(set_backstage_flag == 1)
 		{					
-			
 							
 			if((DATA_BUF[2] & 0x01) == 0x01)//切换下一个后台管理项目，设置温度栏显示序号
 			{
@@ -2100,7 +2087,7 @@ DEFINE_ISR(ctm0,0x14)
 			{
 				set_time_flag = 0;
 				//set_week_schedule_flag = 0;
-				led_light_level(2);
+				set_led_backlight_level(2);
 				
 				if(start_system == 1){//设置密码 默认不自动存储
 					short_startup_key_flag = 1;
@@ -2110,11 +2097,18 @@ DEFINE_ISR(ctm0,0x14)
 				}
 				else if( system_password_lock_flag == 1)//比较密码 
 				{
+					//SendString("check_password_ok");
 					
-					system_password_lock_flag = 0;
-	    			short_startup_key_flag = 0;	
-	    			long_key_startup_lock_flag = 2;
-	    			check_password_flag = 1;
+					key_confirm_flag = 1;
+					startup_key_hold_ms = 0;
+	    			short_startup_key_flag = 1;	
+				
+    			
+//					system_password_lock_flag = 0;
+//	    			short_startup_key_flag = 0;	
+//	    			long_key_startup_lock_flag = 2;
+//	    			check_password_flag = 1;
+//	    			key_confirm_flag = 1;
 				}
 				else {//RTC时间，和周模式
 				
@@ -2122,16 +2116,11 @@ DEFINE_ISR(ctm0,0x14)
 					short_startup_key_flag = 1;
 					long_key_startup_lock_flag = 0;
 				//	start_system = 0 ;	
-				}
-				
-
-    			
+				}	
 				//SendString("set_time_flag_0");
 				confirm_delay = 10000;		
 			}	
-		}
-		
-		
+		}		
 	}
 }
 

@@ -25,6 +25,6 @@
 void TM1638_Write(unsigned char	DATA);//TM1638写数据函数
 void Write_DATA(unsigned char add,unsigned char DATA);//指定地址写入数据
 void Write_COM(unsigned char cmd);		//发送命令字
-
+void init_TM1638(void);
 
 #endif

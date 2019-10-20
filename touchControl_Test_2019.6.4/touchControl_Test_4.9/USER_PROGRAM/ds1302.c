@@ -85,7 +85,7 @@ void Write_Ds1302_Byte(unsigned  char temp)
 	
 	for (i=0;i<8;i++)     	//循环8次 写入数据
 	{ 
-		if(temp & 0x01 != 0)
+		if((temp & 0x01) != 0)
 		{
 			SDA_H();	
 		}
@@ -265,7 +265,7 @@ void init_ds1302()
    SCK_L();
    
    i = Read_Ds1302(0x81);//读取秒寄存器
-   if(i & 0x80 !=0)
+   if((i & 0x80) !=0)
    {
    		Write_Ds1302(0x8e,0x00);
    		//Set_RTC();

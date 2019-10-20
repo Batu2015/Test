@@ -42,3 +42,17 @@ void Write_DATA(unsigned char add,unsigned char DATA)//指定地址写入数据
 	TM1638_Write(DATA);
 	STB_H();	
 }
+
+//TM1638初始化函数
+void init_TM1638(void)
+{
+	unsigned char i;
+	Write_COM(0x88);       //亮度 (0x88-0x8f)8级亮度可调
+	Write_COM(0x40);       //采用地址自动加1
+	STB_L();	           //
+	TM1638_Write(0xc0);    //设置起始地址
+
+	for(i=0;i<16;i++)	   //传送16个字节的数据
+		TM1638_Write(0x00);
+	STB_H();
+}
