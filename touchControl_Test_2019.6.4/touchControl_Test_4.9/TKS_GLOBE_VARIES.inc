@@ -54,7 +54,7 @@
 #define IO_TOUCH_ATTR2  0000b
 ; Components' settings ...
 ; Global options' settings ...
-#define DebounceTimes   5 	; 30mS
+#define DebounceTimes   0 	; 30mS
 #define AutoCalibrationPeriod 7 	; x 8 (640mS)
 #define HighSensitive   0 	; uncheck
 #define MaximumKeyHoldTime 0 	; Disable

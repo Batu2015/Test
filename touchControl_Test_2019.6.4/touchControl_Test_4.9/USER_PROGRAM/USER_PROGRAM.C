@@ -9,8 +9,6 @@
 #define u8 unsigned char
 #define u16 unsigned int
 
-
-
 //可控硅控制引脚
 #define SCR_CONTROL	_pa1
 //过零检测指示灯
@@ -69,8 +67,10 @@ static volatile bit confirm_lock_key_flag = 0;//按下第一个按键，熄灭led后标志位
 //密码锁定 4位，十六进制
 char system_password_lock[4] = {0};
 char get_password_lock_code[4] = {0};
-//unsigned int system_password = 0x0000;// 默认密码为 0000
 volatile unsigned char system_password_lock_flag = 0;
+uint test_hold_ms  = 0;
+unsigned char system_password_lock_index = 0;
+uchar check_password_flag = 0;
 
 
 volatile unsigned char display_numer[16]={0};
@@ -122,8 +122,7 @@ static char model_index = 1;
 static char model_key_flag = 1;
 static char model_lock_flag = 1;
 
-//char up_key_flag = 1;
-//char down_key_flag = 0;
+
 unsigned char key_add_flag = 0;
 unsigned char key_sub_flag = 0;
 unsigned char check_long_key_flag = 0;
@@ -1080,6 +1079,7 @@ void select_model_()
 		}	
 }
 
+
 //==============================================
 //**********************************************
 //主程序函数初始化
@@ -1096,8 +1096,6 @@ void USER_PROGRAM_INITIAL()
 	delay_num = 0;//默认关闭可控硅 按下启动按键后启动定时器
 	SCR_CONTROL = 1;
 	LED_detection = 0;
-	
-
 	
 	set_Serial_number = 0;//后台功能序号
 	temp_vaule = EEPROM_ByteRead(0x7e);
@@ -1174,8 +1172,6 @@ void USER_PROGRAM_INITIAL()
 		delay_ms(500);			
 	}
 		
-
-	
 	if(EEPROM_ByteRead(0x7a) == 0xff || EEPROM_ByteRead(0x7b) == 0xff || EEPROM_ByteRead(0x7c) == 0xff || EEPROM_ByteRead(0x7d) == 0xff)
 	{
 			//上电后读取密码锁的值 0x00== 不锁定按键，否则需要输入密码
@@ -1213,23 +1209,19 @@ void USER_PROGRAM_INITIAL()
 
 
 }
-uint test_hold_ms  = 0;
-unsigned char system_password_lock_index = 0;
-uchar check_password_flag = 0;
+
 //==============================================
 //**********************************************
 //主程序
 //==============================================
 void USER_PROGRAM()
 {
-
 	unsigned int temp_value;
 	uchar test_count[4];
 	uchar i;
 	GCC_CLRWDT();	
 	GET_KEY_BITMAP();//按键扫描	
-			
-			
+	
 	/*检测是否有按键按下*/
 	if(DATA_BUF[1] != 0x00 || DATA_BUF[2] != 0x00)
 	{
@@ -1246,7 +1238,6 @@ void USER_PROGRAM()
 				if(get_password_lock_code[i] != 0)//判断只要是存储的密码不等于0000就跳转到输入密码界面
 				{//密码错误 进入设置密码界面
 					
-					//check_password_flag = 1;
 					system_password_lock_flag = 1;
 					set_led_backlight_level(0);
 					display_all_data_clear();
@@ -1259,29 +1250,31 @@ void USER_PROGRAM()
 		
 	}
 	
-	/*
-	//系统密码锁定 
-	同时按下后面三个按键，启动密码界面	
-	目的是锁定后面四个按键		
-	*/
-	if(short_startup_key_flag != 1 && start_system == 1 && key_confirm_flag != 1)
-	{
-		if(((DATA_BUF[1] & 0x40) == 0x40) && ((DATA_BUF[1] & 0x80) == 0x80) && ((DATA_BUF[2] & 0x01) == 0x01))// 3 4 5三个按键
+		/*
+		//系统密码锁定 
+		同时按下后面三个按键，启动密码界面	
+		目的是锁定后面四个按键		
+		*/
+	
+		if(short_startup_key_flag != 1 && start_system == 1 && key_confirm_flag != 1)
 		{
-			test_hold_ms++;	
-					
-			if(test_hold_ms >= 2000 )
+			if(((DATA_BUF[1] & 0x40) == 0x40) && ((DATA_BUF[1] & 0x80) == 0x80) && ((DATA_BUF[2] & 0x01) == 0x01))// 3 4 5三个按键
 			{
-				system_password_lock_flag = 1;	
-				test_hold_ms = 0;	
-			}	
-		}
-		else
-		{
-			test_hold_ms = 0;
-		
-		}
-	}	
+				test_hold_ms++;	
+						
+				if(test_hold_ms >= 2000 )
+				{
+					system_password_lock_flag = 1;	
+					test_hold_ms = 0;	
+				}	
+			}
+			else
+			{
+				test_hold_ms = 0;
+			
+			}
+		}	
+
 		
 		if(system_password_lock_flag == 1)
 		{
@@ -1295,7 +1288,7 @@ void USER_PROGRAM()
 				system_password_lock[2] = 0;
 				system_password_lock[3] = 0;	
 			}
-						
+				
 			if((DATA_BUF[2] & 0x01) == 0x01 && (DATA_BUF[1] & 0x80) != 0x80)//判断是否只有最后一个按键按下
 			{		
 			    key_hold_ms++;
@@ -1321,8 +1314,7 @@ void USER_PROGRAM()
 	    			up_key_hold_ms = 0;					
 	    			system_password_lock[system_password_lock_index]++;
 	    			if(system_password_lock[system_password_lock_index] > 0x0f)system_password_lock[system_password_lock_index] = 0;			
-					key_add_flag = 1;
-								
+					key_add_flag = 1;				
 	    		}		
 			}
 			else if (key_add_flag == 1 || (up_key_hold_ms >= 1 && up_key_hold_ms <=10))
@@ -1364,15 +1356,14 @@ void USER_PROGRAM()
 		}
 		
 	
-	if(B_2ms == 1)
+//	if(B_2ms == 1)
 	{
-			B_2ms = 0;	
+			//B_2ms = 0;	
 							
 			if((DATA_BUF[1] & 0x10) == 0x10)//key13 第一个按键 确认按键 返回 熄灭 密码确认
 			{			
 				key_confirm_flag = 1;
 				startup_key_hold_ms++;
-				
 			}	
 			else
 			{
@@ -1998,8 +1989,7 @@ void USER_PROGRAM()
 		}
 		
 		display_update();
-	}	  	
-		
+	}	  		
 }
 
 //外部中断0
@@ -2099,8 +2089,10 @@ DEFINE_ISR(ctm0,0x14)
 				{
 					//SendString("check_password_ok");
 					
-					key_confirm_flag = 1;
-					startup_key_hold_ms = 0;
+					
+					
+					//key_confirm_flag = 1;
+					//startup_key_hold_ms = 0;
 	    			short_startup_key_flag = 1;	
 				
     			
