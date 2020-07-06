@@ -522,8 +522,8 @@ void display_set_tempture(int set_temp){
 //显示NTC实时温度
 void display_get_NTC_tempture(int get_temp){
 	
-	display_num(8,get_temp/10);
-	display_num(9,get_temp%10);				
+	display_num(9,get_temp/10);
+	display_num(8,get_temp%10);				
 }
 
 //关闭某一个数码管 不包括小数点位
@@ -1135,7 +1135,7 @@ void USER_PROGRAM_INITIAL()
    
  	init_ds1302();//DS1302实时时钟初始化
  	init_TM1638();//TM1638初始化
- 	set_led_backlight_level(7);//led灯初始亮度
+ 	set_led_backlight_level(5);//led灯初始亮度
  	
     ntcinit();//热敏电阻初始化
     UART_Init();//串口初始化
@@ -1223,13 +1223,16 @@ void USER_PROGRAM()
 	GET_KEY_BITMAP();//按键扫描	
 	
 	/*检测是否有按键按下*/
-	if(DATA_BUF[1] != 0x00 || DATA_BUF[2] != 0x00)
+	/*
+	 开机按键不使能，后面四个按键任何按键按下就跳转到输入密码界面
+	*/
+	if((DATA_BUF[1] & 0x20) != 0x20 || (DATA_BUF[1] & 0x40) != 0x40 || (DATA_BUF[1] & 0x80) != 0x80 || (DATA_BUF[2] != 0x00))
 	{
 		confirm_delay = 10000;//20秒
 //		if(set_time_flag == 1 || set_week_schedule_flag == 1){
 //			confirm_delay = 10000;//10s后无任何操作自动返回			
 //		}
-		set_led_backlight_level(8);
+		set_led_backlight_level(4);
 		if(long_key_startup_lock_flag == 2 && system_password_lock_flag != 1)//锁定使能后
 		{
 			
@@ -1265,6 +1268,10 @@ void USER_PROGRAM()
 				if(test_hold_ms >= 2000 )
 				{
 					system_password_lock_flag = 1;	
+				system_password_lock[0] = 0;
+				system_password_lock[1] = 0;
+				system_password_lock[2] = 0;
+				system_password_lock[3] = 0;
 					test_hold_ms = 0;	
 				}	
 			}
@@ -1278,7 +1285,7 @@ void USER_PROGRAM()
 		
 		if(system_password_lock_flag == 1)
 		{
-			set_led_backlight_level(8);
+			set_led_backlight_level(4);
 			
 			if (check_password_flag == 1)
 			{
@@ -1297,7 +1304,7 @@ void USER_PROGRAM()
 	    	{
 				if(key_hold_ms > 10 && key_hold_ms < 1000 )
 	    		{
-	    			
+	    			 
 	    			key_hold_ms = 0;
 	    			system_password_lock_index++;//index
 	    			if(system_password_lock_index >= 4)system_password_lock_index = 0;
@@ -1535,7 +1542,7 @@ void USER_PROGRAM()
 				start_system = 0;
 				delay_num = 1;	
 				
-				set_led_backlight_level(8);//开机亮度最高
+				set_led_backlight_level(5);//开机亮度最高
 				
 				display_decimal(1,1);
 				display_decimal(4,1);

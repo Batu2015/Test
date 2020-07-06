@@ -2,7 +2,7 @@
 #include "ds1302.h"
 
 /*********************************************************************************
-* 【声    明】： 此程序仅用于学习与参考，引用请注明版权和作者信息！
+* 【声    明】： 
 * 【函数功能】： DS1302串行数码管显示时钟 			   			            			    
 * 【接线说明】： 时钟模块与单片机连接:SCLK- pd5  I/O-Pd6  RST-Pa7   VCC-VCC  GND-GND 
                  
@@ -25,16 +25,31 @@ void init_ds1302(void);
 void delay(uint z);
 
 /* 变量定义 -----------------------------------------------*/
+
+#ifdef _new_board_
+
+#define RST_H() 	{_pdc5 = 0; _pd5 = 1;}
+#define RST_L() 	{_pdc5 = 0; _pd5 = 0;}
+
+#define SCK_H() 	{_pac7 = 0;_pa7 = 1;}
+#define SCK_L() 	{_pac7 = 0;_pa7 = 0;}
+
+#else
+
 #define SCK_H() 	{_pdc5 = 0; _pd5 = 1;}
 #define SCK_L() 	{_pdc5 = 0; _pd5 = 0;}
+
+#define RST_H() 	{_pac7 = 0;_pa7 = 1;}
+#define RST_L() 	{_pac7 = 0;_pa7 = 0;}
+
+#endif
 
 #define SDA_H() 	{_pdc6 = 0;_pd6 = 1;}
 #define SDA_L() 	{_pdc6 = 0;_pd6 = 0;}
 #define SDA_IN()	_pdc6 = 1
 #define SDA			_pd6
 
-#define RST_H() 	{_pac7 = 0;_pa7 = 1;}
-#define RST_L() 	{_pac7 = 0;_pa7 = 0;}
+
 
 #define UP() {SCK_L();nop();SCK_H();nop();} //上升沿  ,使用宏定义函数时最后一定家分号
 #define DOWN() {SCK_H();_nop();SCK_L();_nop();} //下降沿
