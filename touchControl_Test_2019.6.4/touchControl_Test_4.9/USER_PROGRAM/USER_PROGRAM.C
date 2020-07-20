@@ -2008,8 +2008,6 @@ void USER_PROGRAM()
 	}	  		
 }
 
-
-
 //Õ‚≤ø÷–∂œ0
 DEFINE_ISR (INT0, 0x04)
 {
