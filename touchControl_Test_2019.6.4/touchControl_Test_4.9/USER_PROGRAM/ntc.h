@@ -5,7 +5,7 @@
 #define u16 unsigned int
 
 
-void ntcinit();
+void ntc_init();
 u16 getad(u8 ch);
 u8 GetTemp();
 u16 getad(u8 ch);

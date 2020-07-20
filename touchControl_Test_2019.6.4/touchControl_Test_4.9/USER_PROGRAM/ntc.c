@@ -359,9 +359,15 @@ const unsigned int NTCcode[] = {
 };
 #endif
 	
-void ntcinit()
+void ntc_init()
 {
-	_pbs1 = 0x33;//使能AN4,an6为ad口 	
+//	_pbs1 = 0x33;//使能AN4,an5为ad口 
+	_pbs10 = 1;//AN4
+	_pbs11 = 1;
+	
+	_pbs12 = 1;//AN5
+	_pbs13 = 1;
+		
 //	_atm = 1;//AD自动转换控制位
 	_adcr0 = 0x30;//使能adc
 	_adcr1 = 0x03;// sys/8  	

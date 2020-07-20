@@ -1,3 +1,5 @@
+
+
 #include "USER_PROGRAM.H"  
    
 #include "ntc.h"
@@ -14,6 +16,10 @@
 //过零检测指示灯
 #define LED_detection  _pa5
 #define bps9600   12  //sys=8m
+//继电器控制引脚
+
+#define relay_control_enable() 	{_pbc6 = 0; _pb6 = 1;}
+#define relay_control_disable() 	{_pbc6 = 0; _pb6 = 0;}
 
 typedef struct {
 	 unsigned char b0 : 1;
@@ -61,7 +67,7 @@ bit start_system = 0;
 
 volatile bit set_time_flag = 0;//按键长按功能启动后，暂时屏蔽掉长按功能
 bit key_confirm_flag = 0;//确认按键
-static volatile int confirm_delay = 10000;//10S后无操作，自动确认返回
+static volatile int confirm_delay = 10000;//20S后无操作，自动确认返回
 static volatile bit confirm_lock_key_flag = 0;//按下第一个按键，熄灭led后标志位
 
 //密码锁定 4位，十六进制
@@ -81,7 +87,7 @@ volatile int delay_num;   //(5ms == 2500 ) 4.9ms 4.8ms....
 
 const unsigned short TimeValueCount[] =
 {//3500,3450,3400,3350,3300,3250,3200,3150,3100,3050,
-3000,2950,2900,2850,2800,2750,2700,2650,2600,2550,2500,
+//3000,2950,2900,2850,2800,2750,2700,2650,2600,2550,2500,
 2450,2400,2350,2300,2250,2200,2150,2100,2050,
 2000,1950,1900,1850,1800,1750,1700,1650,1600,
 1550,1500,1450,1400,1350,1300,1250,1200,1150,
@@ -163,9 +169,7 @@ bit backstage_add_flag = 0;
 bit backstage_sub_flag = 0;
 unsigned int set_Serial_number = 0;
 
-
-
-//
+//延时函数
 void delay_ms(u16 ms)
 {
 	while(ms--)
@@ -175,15 +179,7 @@ void delay_ms(u16 ms)
 	}
 }
 
-void delay_50us()
-{
 
-	//while(us--)
-	{
-		GCC_DELAY(100);//编译器自带延时指定个周期，在主频8Mhz下，一个指令周期为0.5us	
-		GCC_CLRWDT();
-	}	
-}
 
 /*
 点亮任何位置的led
@@ -624,7 +620,6 @@ void ctm_init( void )//2ms
 
 void int0_init()
 {
-		//int0
 	_pac6 = 1;				//设置为输入 INIT0
 	_papu6 = 1;
 	_integ = 0x02;	//下降沿
@@ -690,7 +685,6 @@ void UART_Init()
 	_ucr2=0xc4;
 	_brg=bps9600;
 }
-
 
 /*
 * 模式选择：恒温、恒温峰谷、智能、智能峰谷、休假
@@ -779,13 +773,13 @@ void display_update()
 	判断vdd电压低于4v时自动切换到低速模式
 	
 */
-void lvd_init()
-{
-	_lvdc = 0x07;//低于4V
-	_mf3e = 1;
-	_lvden = 1;//使能
-	
-}
+//void lvd_init()
+//{
+//	_lvdc = 0x07;//低于4V
+//	_mf3e = 1;
+//	_lvden = 1;//使能
+//	
+//}
 
 /*
 	系统时钟初始化 8MHZ
@@ -841,6 +835,8 @@ void set_display_time()
 */
 void set_temp_add()
 {
+	confirm_delay = 10000;
+		
 	switch(adjust_time_index)
 	{
 		case 1:
@@ -874,7 +870,6 @@ void set_temp_add()
 			{
 				seg_minute = 0;
 				seg_hour++;
-				
 			}
 			
 			if(seg_hour >= 24 && seg_minute == 30)
@@ -901,6 +896,8 @@ void set_temp_add()
 */
 void set_temp_sub()
 {
+		confirm_delay = 10000;
+		
 	switch(adjust_time_index)
 	{
 		case 1:
@@ -1096,6 +1093,7 @@ void USER_PROGRAM_INITIAL()
 	delay_num = 0;//默认关闭可控硅 按下启动按键后启动定时器
 	SCR_CONTROL = 1;
 	LED_detection = 0;
+	relay_control_disable();//初始化时默认继电器关闭
 	
 	set_Serial_number = 0;//后台功能序号
 	temp_vaule = EEPROM_ByteRead(0x7e);
@@ -1135,9 +1133,9 @@ void USER_PROGRAM_INITIAL()
    
  	init_ds1302();//DS1302实时时钟初始化
  	init_TM1638();//TM1638初始化
- 	set_led_backlight_level(5);//led灯初始亮度
+ 	set_led_backlight_level(8);//led灯初始亮度
  	
-    ntcinit();//热敏电阻初始化
+    ntc_init();//热敏电阻初始化
     UART_Init();//串口初始化
 
     ctm_init();//1ms定时时间
@@ -1203,10 +1201,11 @@ void USER_PROGRAM_INITIAL()
 	};
 	
 	current_tempture = 80;
-	delay_num = 0;
+	delay_num = 0;///
 	SCR_CONTROL = 1;
-	_ston = 0;
+	relay_control_disable();//关闭继电器
 
+	_ston = 0;
 
 }
 
@@ -1224,15 +1223,17 @@ void USER_PROGRAM()
 	
 	/*检测是否有按键按下*/
 	/*
-	 开机按键不使能，后面四个按键任何按键按下就跳转到输入密码界面
+	 开机按键不使能,后面四个按键任何按键按下就跳转到输入密码界面
 	*/
-	if((DATA_BUF[1] & 0x20) != 0x20 || (DATA_BUF[1] & 0x40) != 0x40 || (DATA_BUF[1] & 0x80) != 0x80 || (DATA_BUF[2] != 0x00))
+	if((DATA_BUF[1] & 0x20) != 0x20 || (DATA_BUF[1] & 0x40) != 0x40 || (DATA_BUF[1] & 0x80) != 0x80 || (DATA_BUF[2] & 0x01 != 0x01))
 	{
-		confirm_delay = 10000;//20秒
+		SendString("1");
+		
+	//	confirm_delay = 10000;//20秒
 //		if(set_time_flag == 1 || set_week_schedule_flag == 1){
-//			confirm_delay = 10000;//10s后无任何操作自动返回			
+//			confirm_delay = 10000;//20s后无任何操作自动返回			
 //		}
-		set_led_backlight_level(4);
+//		set_led_backlight_level(1);
 		if(long_key_startup_lock_flag == 2 && system_password_lock_flag != 1)//锁定使能后
 		{
 			
@@ -1249,8 +1250,7 @@ void USER_PROGRAM()
 					return;			
 				}
    			}	
-		}
-		
+		}	
 	}
 	
 		/*
@@ -1285,7 +1285,7 @@ void USER_PROGRAM()
 		
 		if(system_password_lock_flag == 1)
 		{
-			set_led_backlight_level(4);
+			set_led_backlight_level(1);
 			
 			if (check_password_flag == 1)
 			{
@@ -1441,10 +1441,13 @@ void USER_PROGRAM()
 					return;	
 				}	
 				
-				if(hengwen_flag == 1 && set_hengwen_key_flag == 1)
+				if(hengwen_flag == 1 && set_hengwen_key_flag == 1)//恒温下
 				{
 					set_hengwen_key_flag = 0;
 					EEPROM_ByteWrite(0x7f,set_tempture_value);
+					
+					start_tempture = set_tempture_value -2;
+					stop_tempture = set_tempture_value + 1;
 					return;		
 				}	
 				
@@ -1477,10 +1480,12 @@ void USER_PROGRAM()
 						confirm_lock_key_flag = 1;	
 						
 						//By 19/2/24 关闭可控硅
-					
+						
+						relay_control_disable();//关闭继电器	
 						current_tempture = 80;
 						delay_num = 0;
 						SCR_CONTROL = 1;
+						
 						_ston = 0;
 						start_system = 1;	//系统启动开机标志位
 						
@@ -1540,9 +1545,9 @@ void USER_PROGRAM()
 	   			system_password_lock_flag = 0;	
 	   			
 				start_system = 0;
-				delay_num = 1;	
+				//delay_num = 1;	
 				
-				set_led_backlight_level(5);//开机亮度最高
+				set_led_backlight_level(8);//开机亮度最高
 				
 				display_decimal(1,1);
 				display_decimal(4,1);
@@ -1721,11 +1726,15 @@ void USER_PROGRAM()
 					if((seg_hour > set_week_schedule[seg_week-1][i].start_time) && (seg_hour <= set_week_schedule[seg_week][i].start_time))
 					 	set_tempture_value = set_week_schedule[seg_week-1][i].set_temp;		
 				}		
-		 	}		
+		 	}
+		
+		 			start_tempture = set_tempture_value -2;
+					stop_tempture = set_tempture_value + 1;
+				
 		}
 	
-		start_tempture = set_tempture_value -2;
-		stop_tempture = set_tempture_value + 1;
+//		start_tempture = set_tempture_value -2;
+//		stop_tempture = set_tempture_value + 1;
 		
 		display_get_NTC_tempture(current_tempture);	
     }
@@ -1979,7 +1988,7 @@ void USER_PROGRAM()
   		else
   		{
   			last_sec = new_sec;	
-  			display_decimal(3,0);	
+  			display_decimal(3,0);//小数点	
   		}	
   	
   		display_RTC_time();
@@ -1999,12 +2008,14 @@ void USER_PROGRAM()
 	}	  		
 }
 
+
+
 //外部中断0
 DEFINE_ISR (INT0, 0x04)
 {
 	GCC_CLRWDT();
-		
-	if(delay_num < 59 && delay_num >0)
+	
+	if(delay_num < 48 && delay_num >0)
 	{
 		_ston = 1;//打开定时器stm0		
 	}
@@ -2020,26 +2031,41 @@ DEFINE_ISR (INT0, 0x04)
 	if(control_delay == 2)//2s变化一次电压
 	{
 		control_delay = 0;
-		if(current_tempture <= start_tempture)//加热
+		
+		if(delay_num == 48)
+		{
+			delay_num = 49;
+			SCR_CONTROL = 1;//	继电器打开后，2S关闭可控硅
+		}
+		
+		if((current_tempture <= start_tempture) && (delay_num < 48))//加热 59-11=48
 		{
 			delay_num++;
-			
-			//delay_num=delay_num+50;
-			if(delay_num >= 59)
+
+			if(delay_num >= 48)//59
 			{
-				display_decimal(8,1);
-				delay_num = 59;
+				delay_num = 48;//59
 				SCR_CONTROL = 0;
 				_ston = 0;	
+			    relay_control_enable();
 			}		
 		}
-		else if(current_tempture >= stop_tempture)//停止
+		else if(current_tempture >= stop_tempture && (delay_num > 0))//停止
 		{
-			//delay_num = delay_num-10;//目的是快速关断可控硅	
-			delay_num= delay_num - 30;
-			if(delay_num < 0)
+			if(delay_num == 49)
 			{
-				display_decimal(8,0);
+				delay_num = 47;
+				SCR_CONTROL = 0; //	
+			
+				return;
+			}
+			
+			
+			relay_control_disable();//关闭继电器
+			delay_num = delay_num-5;//目的是快速关断可控硅	
+			//delay_num= delay_num - 30;
+			if(delay_num <= 0)
+			{				
 				delay_num = 0;
 				SCR_CONTROL = 1;
 				_ston = 0;			
@@ -2067,7 +2093,7 @@ DEFINE_ISR(ctm0,0x14)
 		{
 			ctm0_count--;			
 			
-			if(ctm0_count == 250)//250改成400ms
+			if(ctm0_count == 250)//250
 			{
 				ctm_500ms_flag = 1;	
 			}
@@ -2078,13 +2104,14 @@ DEFINE_ISR(ctm0,0x14)
 			}
 		}		
 		
-		if(set_time_flag == 1 || set_week_schedule_flag == 1 || system_password_lock_flag == 1)
+		if(set_time_flag == 1 || set_week_schedule_flag == 1 || system_password_lock_flag == 1 || set_hengwen_key_flag == 1)
 		{
-			if(--confirm_delay < 0)//20S	
-			{
+			
+			if(--confirm_delay <= 0)//20S	
+			{					
 				set_time_flag = 0;
-				//set_week_schedule_flag = 0;
-				set_led_backlight_level(2);
+				
+				set_led_backlight_level(1);
 				
 				if(start_system == 1){//设置密码 默认不自动存储
 					short_startup_key_flag = 1;
@@ -2095,22 +2122,11 @@ DEFINE_ISR(ctm0,0x14)
 				else if( system_password_lock_flag == 1)//比较密码 
 				{
 					//SendString("check_password_ok");
-					
-					
-					
-					//key_confirm_flag = 1;
-					//startup_key_hold_ms = 0;
 	    			short_startup_key_flag = 1;	
 				
-    			
-//					system_password_lock_flag = 0;
-//	    			short_startup_key_flag = 0;	
-//	    			long_key_startup_lock_flag = 2;
-//	    			check_password_flag = 1;
-//	    			key_confirm_flag = 1;
 				}
 				else {//RTC时间，和周模式
-				
+									
 					key_confirm_flag = 1;
 					short_startup_key_flag = 1;
 					long_key_startup_lock_flag = 0;
@@ -2135,7 +2151,6 @@ DEFINE_ISR(stm0,0x18)
 		_stmal = TimeValueCount[delay_num]&0xff;//t=1/(sys/16)*625 s   =5ms
 		_stmah = TimeValueCount[delay_num]>>8;//注意先后顺序，先L 后H
 				
-		
 		SCR_CONTROL = 0;  
 		GCC_DELAY(500);//编译器自带延时指定个周期，在主频8Mhz下，一个指令周期为0.5us	
 		SCR_CONTROL = 1;
