@@ -2059,8 +2059,7 @@ DEFINE_ISR (INT0, 0x04)
 			
 				return;
 			}
-			
-			
+						
 			relay_control_disable();//关闭继电器
 			delay_num = delay_num-5;//目的是快速关断可控硅	
 			//delay_num= delay_num - 30;
