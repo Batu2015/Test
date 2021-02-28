@@ -87,7 +87,7 @@ volatile int delay_num;   //(5ms == 2500 ) 4.9ms 4.8ms....
 
 const unsigned short TimeValueCount[] =
 {//3500,3450,3400,3350,3300,3250,3200,3150,3100,3050,
-//3000,2950,2900,2850,2800,2750,2700,2650,2600,2550,2500,
+3000,2950,2900,2850,2800,2750,2700,2650,2600,2550,2500,
 2450,2400,2350,2300,2250,2200,2150,2100,2050,
 2000,1950,1900,1850,1800,1750,1700,1650,1600,
 1550,1500,1450,1400,1350,1300,1250,1200,1150,
@@ -104,7 +104,7 @@ volatile unsigned int stm_count = 0;
 volatile char seg_hour = 0;
 volatile char seg_second = 0;
 volatile char seg_minute = 0;
-volatile char seg_week = 1;
+volatile int seg_week = 1;
 volatile char get_new_hour_range = 0;
 volatile char get_new_minute_range = 0;
 
@@ -191,7 +191,7 @@ enable==表示点亮或熄灭
 void display_position_led(int index,char number,char enable)
 {
 	char i;
-	mybit temp1,temp2,temp4,temp6,temp8,temp10,temp12;
+	mybit temp2,temp6,temp8,temp10,temp12;
 //	temp1.data = display_numer[1];  //GR1
 	temp2.data = display_numer[2];	//GR2
 //	temp4.data = display_numer[4];	//GR2
@@ -693,7 +693,7 @@ void UART_Init()
 */
 void key_model_select(char index)
 {
-	char model_key_flag = 0;	
+//	char model_key_flag = 0;	
 		
 	mybit temp1,temp2,temp3,temp4;
 	temp1.data = display_numer[6];
@@ -966,7 +966,7 @@ void set_temp_sub()
 */
 void week_schudule_init()
 {
-	char i,j;
+	int i,j;
 	char table_schedule[3][4]={{1,0,8,5},{1,0,16,20},{1,0,24,6}};
 	
 	for(i = 0;i<7;i++)
@@ -989,7 +989,7 @@ void week_schudule_init()
 */
 void write_eeprom_schedule()
 {
-	char i,j,z=0;
+	int i,j,z=0;
 	for(i = 0;i<7;i++)
 	{
 		for(j = 0;j<4;j++)
@@ -1215,8 +1215,8 @@ void USER_PROGRAM_INITIAL()
 //==============================================
 void USER_PROGRAM()
 {
-	unsigned int temp_value;
-	uchar test_count[4];
+//	unsigned int temp_value;
+//	uchar test_count[4];
 	uchar i;
 	GCC_CLRWDT();	
 	GET_KEY_BITMAP();//按键扫描	
@@ -1716,7 +1716,7 @@ void USER_PROGRAM()
     if(int0_flag == 1 && set_time_flag != 1 && confirm_lock_key_flag != 1 && start_system == 0 && set_week_schedule_flag == 0 && system_password_lock_flag != 1)
     {
     	int0_flag = 0;
-		current_tempture = GetTemp();//读取当前NTC电阻的实时温度
+		current_tempture = GetTemp(5);//读取当前NTC电阻的实时温度
 		if(zhineng_flag == 1)
 		{
 			for(i = 0;i<4;i++)
@@ -2003,7 +2003,6 @@ void USER_PROGRAM()
 				display_set_tempture(set_tempture_value);	
 			}
 		}
-		
 		display_update();
 	}	  		
 }

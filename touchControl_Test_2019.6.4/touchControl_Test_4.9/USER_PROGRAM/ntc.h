@@ -7,9 +7,8 @@
 
 void ntc_init();
 u16 getad(u8 ch);
-u8 GetTemp();
-u16 getad(u8 ch);
-	unsigned int Get_Temp(void);
+
+u8 GetTemp(u8 channel);
 	unsigned int GetAdToTempature();//读AD值转换成温度
-unsigned int get_adc_value(void);
+//unsigned int get_adc_value(u8 channel);
 #endif

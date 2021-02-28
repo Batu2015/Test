@@ -91,7 +91,7 @@ const unsigned int NTCcode[] = {
 };
 #endif
 
-const unsigned int   Ad_Value_table[]={
+const unsigned int Ad_Value_table[]={
 	#if 0
 779  //0
 ,770  //1
@@ -396,12 +396,12 @@ u16 getad(u8 ch)
 			入口参数  : 无
 			返回值    : 无
 *****************************************************************************************/
-unsigned int get_adc_value(void)
+unsigned int get_adc_value(u8 channel)
 {
   unsigned int i, j;
   unsigned int filter_temp;
   for(i = 0; i < FILTER_N; i++) {
-    filter_buf[i] = getad(4);
+    filter_buf[i] = getad(channel);
   }
   // 采样值从小到大排列（冒泡法）
   for(j = 0; j < FILTER_N - 1; j++) {
@@ -417,13 +417,13 @@ unsigned int get_adc_value(void)
 	return ADC_VALUE;
 }
 
-
+#if 0
 unsigned int GetAdToTempature()//读AD值转换成温度
 {
-	unsigned char index=0;
- unsigned int space,poor,val,temp_val;
+	unsigned int index=0;
+    unsigned int space,poor,val,temp_val;
  	unsigned int Ad_Data;	
- 	get_adc_value();
+ 	get_adc_value(4);
  	Ad_Data = ADC_VALUE;
  	
     for(index=0;index<101;index++)
@@ -436,20 +436,19 @@ unsigned int GetAdToTempature()//读AD值转换成温度
 			temp_val=index*10+(10-val);
 			index1=	 index;
 	   	  return  temp_val; 
-	    }
-    	
+	    }	
    }	
 }
+#endif
 
-	
 //获取温度
-u8 GetTemp()
+u8 GetTemp(u8 channel)
 {
 	u16 temp;
-	unsigned int i, j;
-	unsigned int filter_temp;
+	unsigned int i;
+//	unsigned int filter_temp;
 		
-	temp=get_adc_value();//getad(4);
+	temp=get_adc_value(channel);//getad(4);
 	if(temp>4000)
 	{
 		return 99;	

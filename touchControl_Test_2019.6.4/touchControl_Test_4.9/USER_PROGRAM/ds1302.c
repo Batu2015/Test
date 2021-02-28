@@ -204,7 +204,7 @@ uchar Read_Ds1302 ( uchar address )
 
 void Read_RTC(uchar *read_time)	        //读取 日历
 {
-	uchar i,*p;
+	uchar i;//*p;
 	//p=read_rtc_address; 	    //地址传递
 	
 	for(i=0;i<7;i++)		    //分7次读取 秒分时日月周年
